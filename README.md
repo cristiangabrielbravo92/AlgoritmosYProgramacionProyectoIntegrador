@@ -13,5 +13,6 @@ Se deberá desarrollar una aplicación, utilizando las clases que considere nece
 - f) Dar de baja a un jefe (se elimina de la empresa, se desvincula de la obra y se libera el grupo de obreros asignado
 - - -
 ## Primera Entrega: UML
+[Link a Modelo UML (Lucidchart)](https://lucid.app/lucidchart/1852f4cd-064a-4caa-a283-08b204906e18/edit?viewport_loc=-143%2C-81%2C3324%2C1183%2C0_0&invitationId=inv_934e6d0f-0100-4a17-961d-4e7751db7c8d) 
+<sub><sup>Nota: para ver en Lucidchart es necesario iniciar sesión. (se puede iniciar sesión con google). </sup></sub>
 ![Modelo del proyecto 1 en UML](https://raw.githubusercontent.com/cristiangabrielbravo92/AlgoritmosYProgramacionProyectoIntegrador/refs/heads/main/UML%20Proyecto%20Integrador.jpg "Modelo del proyecto 1 en UML")
-[Link a Modelo UML (Draw.IO)](https://1drv.ms/u/c/0eee40be2dd1d823/EWuQxi5rOTlJrsY9Mtu9U1oBH1V0U9R278xM1ehYCV1Yyg?e=4ciLxd)
