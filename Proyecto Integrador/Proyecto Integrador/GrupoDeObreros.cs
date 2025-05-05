@@ -24,8 +24,7 @@ namespace Proyecto_Integrador
 			get{return codigoObraTrabajando;}}
 		//Métodos
 		//Agregar obrero
-		public void agregarObrero(string no, string ap, int dn, int le, double su, string ca){
-			Obrero o = new Obrero(no,ap,dn,le,su,ca);
+		public void agregarObrero(Obrero o){
 			obreros.Add(o);}
 		//Eliminar obrero con la posición en la lista
 		public void eliminarObrero(int pos){
