@@ -17,7 +17,7 @@ namespace Proyecto_Integrador
 		private ArrayList obreros = new ArrayList();
 		//Constructor
 		public GrupoDeObreros(int c){
-			codigoObraTrabajando = c;}
+			this.codigoObraTrabajando = c;}
 		//Propiedades
 		public int CodigoObraTrabajando{
 			set{codigoObraTrabajando = value;}
