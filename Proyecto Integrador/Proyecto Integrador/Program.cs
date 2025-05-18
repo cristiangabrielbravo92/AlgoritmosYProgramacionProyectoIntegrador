@@ -47,7 +47,7 @@ namespace Proyecto_Integrador
 					case "4":
 						// acá van las operaciones de la opcion 4
 						mostrarSubmenuImpresiones();
-						
+						Console.WriteLine("\nTrabajo en progreso4...");
 						
 						break;
 					case "5":
@@ -87,7 +87,9 @@ namespace Proyecto_Integrador
 		}
 		
 		static void imprimirBienvenida(Empresa empresa) {
+			Console.WriteLine("-------------------------------------------------------------");
 			Console.WriteLine(" --- Bienvenido a la administración de {0} ---", empresa.NombreEmpresa);
+			Console.WriteLine("-------------------------------------------------------------");
 		}
 		
 		static string solicitarOpcion() {
