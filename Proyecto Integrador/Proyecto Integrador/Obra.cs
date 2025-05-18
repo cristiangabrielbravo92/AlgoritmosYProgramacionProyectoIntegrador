@@ -18,7 +18,7 @@ namespace Proyecto_Integrador
 		private int codigoInterno;
 		private double costo;
 		
-		
+		//Constructor
 		public Obra()
 		{
 		}
@@ -68,18 +68,6 @@ namespace Proyecto_Integrador
 		{
 			get {returnestado;}
 			set {estado = value;}
-		}
-		
-		//Método para mostrar datos de la obra
-		public void ImprimirObra()
-		{
-			Console.WriteLine("Nombre: {0}", nombreObra);
-            Console.WriteLine("Propietario: {0}", propietario);
-            Console.WriteLine("Código: {0}", codigoInterno);
-            Console.WriteLine("Tipo: {0}", tipoDeObra);
-            Console.WriteLine("Costo: {0}", costo);
-            Console.WriteLine("Estado: {0}", estado);
-		}
-		
+		}	
 	}
 }
