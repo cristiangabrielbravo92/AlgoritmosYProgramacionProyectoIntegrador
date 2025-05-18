@@ -42,5 +42,13 @@ namespace Proyecto_Integrador
 		public string Cargo{
 			set{cargo = value;}
 			get{return cargo;}}
+		
+		
+		
+		// Métodos
+		public void imprimir() {
+			Console.WriteLine("Nombre: {0} {1} \nDNI: {2}	Legajo: {3}\nCargo: {4}", nombre, apellido, dni, legajo, cargo);
+			Console.WriteLine("Sueldo: {0}", sueldo);
+		}
 	}
 }
