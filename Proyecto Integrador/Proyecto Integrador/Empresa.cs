@@ -52,7 +52,7 @@ namespace Proyecto_Integrador
 		//Métodos Grupos de obreros
 		//Agregar Grupo de obreros
 		public void agregarGrupo(GrupoDeObreros g){
-			GrupoDeObreros.Add(g);}
+			GruposDeObreros.Add(g);}
 		//Eliminar Grupo de obreros con la posición en la lista
 		public void eliminarGrupo(int pos){
 			GruposDeObreros.RemoveAt(pos);}

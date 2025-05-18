@@ -66,7 +66,7 @@ namespace Proyecto_Integrador
 		
 		public string Estado
 		{
-			get {returnestado;}
+			get {return estado;}
 			set {estado = value;}
 		}	
 	}

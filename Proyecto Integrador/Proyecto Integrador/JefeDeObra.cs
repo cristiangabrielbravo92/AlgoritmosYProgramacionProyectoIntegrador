@@ -25,7 +25,7 @@ namespace Proyecto_Integrador
 //		}
 		public JefeDeObra(string nombre, string apellido, int dni, int legajo, double sueldo, string cargo, double bonificacionEspecial, GrupoDeObreros grupoDirigido):base(nombre, apellido, dni, legajo, sueldo, cargo) 
 		{ 	this.bonificacionEspecial = bonificacionEspecial;
-			this.grupoDirigido = grupoDirigido
+			this.grupoDirigido = grupoDirigido;
 		}
 		
 		// Propiedades

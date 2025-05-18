@@ -1,0 +1,6 @@
+C:\Users\antic\OneDrive\UNAJ\Algoritmos y Programación\Código\ProyectoIntegrador\AlgoritmosYProgramacionProyectoIntegrador\Proyecto Integrador\Proyecto Integrador\obj\Debug\Proyecto Integrador.csprojResolveAssemblyReference.cache
+C:\Users\antic\OneDrive\UNAJ\Algoritmos y Programación\Código\ProyectoIntegrador\AlgoritmosYProgramacionProyectoIntegrador\Proyecto Integrador\Proyecto Integrador\bin\Debug\Proyecto Integrador.exe.config
+C:\Users\antic\OneDrive\UNAJ\Algoritmos y Programación\Código\ProyectoIntegrador\AlgoritmosYProgramacionProyectoIntegrador\Proyecto Integrador\Proyecto Integrador\bin\Debug\Proyecto Integrador.exe
+C:\Users\antic\OneDrive\UNAJ\Algoritmos y Programación\Código\ProyectoIntegrador\AlgoritmosYProgramacionProyectoIntegrador\Proyecto Integrador\Proyecto Integrador\bin\Debug\Proyecto Integrador.pdb
+C:\Users\antic\OneDrive\UNAJ\Algoritmos y Programación\Código\ProyectoIntegrador\AlgoritmosYProgramacionProyectoIntegrador\Proyecto Integrador\Proyecto Integrador\obj\Debug\Proyecto Integrador.exe
+C:\Users\antic\OneDrive\UNAJ\Algoritmos y Programación\Código\ProyectoIntegrador\AlgoritmosYProgramacionProyectoIntegrador\Proyecto Integrador\Proyecto Integrador\obj\Debug\Proyecto Integrador.pdb
