@@ -18,7 +18,7 @@ namespace Proyecto_Integrador
 			
 			// TODO: Implement Functionality Here
 			
-			Console.Write("Press any key to continue . . . ");
+			Console.Write("Presione alguna tecla para salir . . . ");
 			Console.ReadKey(true);
 		}
 	}

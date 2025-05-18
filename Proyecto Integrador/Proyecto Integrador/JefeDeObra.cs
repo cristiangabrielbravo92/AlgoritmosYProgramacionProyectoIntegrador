@@ -31,16 +31,21 @@ namespace Proyecto_Integrador
 		// Propiedades
 		public double BonificacionEspecial {
 			get {return bonificacionEspecial;}
-			set {this.bonificacionEspecial = value;}
+			set {bonificacionEspecial = value;}
 		}
 		public GrupoDeObreros GrupoDirigido {
 			get {return grupoDirigido;}
-			set {this.grupoDirigido = value;}
+			set {grupoDirigido = value;}
 		}
 		
 		
 		// Métodos
-		// Esta clase no contiene métodos, soyez le premiere
+		public void imprimir() {
+			Console.WriteLine("Nombre: {0} {1} \nDNI: {2}	Legajo: {3}\nCargo: {4}", nombre, apellido, dni, legajo, cargo);
+			Console.WriteLine("Sueldo: {0} Bonificación: {1}", sueldo, bonificacionEspecial);
+			Console.WriteLine("Grupo a cargo: {0}", grupoDirigido.CodigoObraTrabajando);
+			               
+		}
 		
 	}
 }
