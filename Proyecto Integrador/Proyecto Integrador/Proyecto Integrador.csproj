@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GrupoDeObreros.cs" />
+    <Compile Include="JefeDeObra.cs" />
     <Compile Include="Obra.cs" />
     <Compile Include="Obrero.cs" />
     <Compile Include="Program.cs" />
