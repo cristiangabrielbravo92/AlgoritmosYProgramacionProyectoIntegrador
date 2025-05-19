@@ -15,7 +15,9 @@ namespace Proyecto_Integrador
 		//Declaración de atributos
 		private string nombreEmpresa;
 		private ArrayList Obras = new ArrayList();
-		private ArrayList GruposDeObreros = new ArrayList();
+		private ArrayList GruposDeObreros = new ArrayList(8);
+		private ArrayList obreros = new ArrayList();
+		
 		//Constructor
 		public Empresa()
 		{
@@ -68,5 +70,35 @@ namespace Proyecto_Integrador
 		//Recuperar lista de grupos de obras
 		public ArrayList verListaGrupos(){
 			return GruposDeObreros;}
+		
+		
+		//Métodos de obreros
+		//Agregar Obrero
+		public void agregarObrero(Obrero obrero) {
+			obreros.Add(obrero);
+		}
+		//Eliminar obrero con la posición en la lista
+		public void eliminarObrero(int posicion) {
+			obreros.RemoveAt(posicion);
+		}
+		//Mostrar la cantidad de obreros
+		public int cantidadObreros() {
+			return obreros.Count;
+		}
+		//Mostrar si existe un obrero
+		public bool existeObrero(Obrero obrero){
+			return obreros.Contains(obrero);
+		}
+		//Recuperar obrero con la posición en la lista
+		public Obrero recuperarObreroPos(int posicion){
+			return (Obrero) obreros[posicion];
+		}
+		//Recuperar lista de obreros
+		public ArrayList verListaObreros(){
+			return obreros;
+		}
+		
+		
+		
 	}
 }
