@@ -29,7 +29,7 @@ namespace Proyecto_Integrador
 			opcion = "-";
 			mostrarMenuPrincipal();
 			opcion = solicitarOpcion();
-			while (opcion != "7") {
+			while (opcion != "8") {
 				// la idea del menú principal es manejarlo con un while y un switch
 				switch (opcion) {
 					case "1":
@@ -58,6 +58,11 @@ namespace Proyecto_Integrador
 					case "6":
 						// acá van las operaciones de la opcion 4
 						Console.WriteLine("Trabajo en progreso6...");
+						
+						break;
+					case "6":
+						// acá van las operaciones de la opcion 4
+						Console.WriteLine("Trabajo en progreso7...");
 						
 						break;
 					default:
@@ -104,7 +109,8 @@ namespace Proyecto_Integrador
 			Console.WriteLine("4 - Ver información específica de obras, obreros o jefes de obras");
 			Console.WriteLine("5 - Modificar el estado de avance de una obra");
 			Console.WriteLine("6 - Dar de baja un jefe de obra");
-			Console.WriteLine("7 - Salir");
+			Console.WriteLine("7 - Dar de alta una obra");
+			Console.WriteLine("8 - Salir");
 		}
 		
 		static void mostrarMenuPrincipal() {
