@@ -16,12 +16,17 @@ namespace Proyecto_Integrador
 		{
 			// declaro las variables para poder empezar a usarlas, queda pendiente ver cuáles se usan como variables globales y cuáles locales
 			Empresa empresa;
+			
+			// instancias de obra, grupo de obreros y jefe de obra que se usan para pruebas durante la implementación.
 			Obra obra;
 			GrupoDeObreros obreros;
-			Obrero obrero;
+			//Obrero obrero;
 			JefeDeObra jefeObra;
+			
+			
 			string opcion;
 			
+			// instancia de empresa que funcionaría en el main
 			empresa = new Empresa("Corporación ACME");
 			
 			imprimirBienvenida(empresa);
@@ -33,8 +38,17 @@ namespace Proyecto_Integrador
 				// la idea del menú principal es manejarlo con un while y un switch
 				switch (opcion) {
 					case "1":
-						// acá van las operaciones de la opcion 1
-						Console.WriteLine("Trabajo en progreso1...");
+						
+						Obrero obrero = solicitarDatosYCrearObrero();
+						obrero.imprimir();
+						
+						// acá tendrían que ir un while que pueda dar de alta masivamente obreros consultando si continuar dando de alta
+						// también tendría que verificarse que ya exista un grupo de obreros antes de instanciarlo o al menos instanciarlo
+						// pero tener la opcion de cancelar si no se tiene un grupo al que agregarlo.
+						
+						// el grupo de obreros se podría obtener ingresando el número de su posición
+						contratarUnObrero(obrero, empresa, obreros);
+						
 						break;
 					case "2":
 						// acá van las operaciones de la opcion 2
@@ -60,9 +74,13 @@ namespace Proyecto_Integrador
 						Console.WriteLine("Trabajo en progreso6...");
 						
 						break;
-					case "6":
+					case "7":
 						// acá van las operaciones de la opcion 4
 						Console.WriteLine("Trabajo en progreso7...");
+						
+						// acá debería ir un while que consulte si se desea continuar el ingreso de más grupos hasta que llegue a 8 grupos
+						
+						
 						
 						break;
 					default:
@@ -91,6 +109,9 @@ namespace Proyecto_Integrador
 			Console.ReadKey(true);
 		}
 		
+		// -------------------------------------
+		// Funciones de mensajes de y menues
+		// -------------------------------------
 		static void imprimirBienvenida(Empresa empresa) {
 			Console.WriteLine("-------------------------------------------------------------");
 			Console.WriteLine(" --- Bienvenido a la administración de {0} ---", empresa.NombreEmpresa);
@@ -134,6 +155,74 @@ namespace Proyecto_Integrador
 			Console.WriteLine("Seleccione qué operación desea realizar: ");
 			mostrarOpcionesMenuImpresiones();
 		}
+		
+		
+		// -------------------------------------
+		// Funciones de operaciones
+		// -------------------------------------
+		static Obrero solicitarDatosYCrearObrero() {
+			Console.Write("Ingrese el nombre: ");
+			string nombre = Console.ReadLine();
+			
+			Console.Write("Ingrese el apellido: ");
+			string apellido = Console.ReadLine();
+			
+			int dni = ingresarYCastearDatoINT("DNI", "solo ingrese el numero sin puntos");
+			
+			int legajo = ingresarYCastearDatoINT("Legajo", "solo ingrese el número sin puntos ni espacios");
+			
+			float sueldo = ingresarYCastearDatoFLOAT("Sueldo", "solo ingrese el número usando punto para separador de decimales");
+			
+			Console.Write("Ingrese el cargo: ");
+			string cargo = Console.ReadLine();
+			
+			return new Obrero(nombre, apellido, dni, legajo, sueldo, cargo);
+		}
+			
+			
+		static void contratarUnObrero(Obrero obrero, Empresa empresa, GrupoDeObreros grupoDeObreros) {
+			empresa.agregarObrero(obrero);
+			grupoDeObreros.agregarObrero(obrero);
+		}
+		
+		
+		
+		
+		
+		
+		// -------------------------------------
+		// Funciones auxiliares
+		// -------------------------------------
+		static int ingresarYCastearDatoINT(string dato, string requisitos) {
+			Console.Write("Ingrese {0} ({1}): ", dato, requisitos);
+			int datoCasteado = 0;
+			bool datoCorrecto = false;
+			while (!datoCorrecto) {
+				try {
+					datoCasteado = int.Parse(Console.ReadLine());
+					datoCorrecto = true;
+				} catch (Exception) {
+					Console.Write("ERROR! - {0} ingresado incorrectamente, {1}: ", dato, requisitos);
+				}
+			}
+			return datoCasteado;
+		}
+
+		static float ingresarYCastearDatoFLOAT(string dato, string requisitos) {
+			Console.Write("Ingrese {0} ({1}): ", dato, requisitos);
+			float datoCasteado = 0;
+			bool datoCorrecto = false;
+			while (!datoCorrecto) {
+				try {
+					datoCasteado = float.Parse(Console.ReadLine());
+					datoCorrecto = true;
+				} catch (Exception) {
+					Console.Write("ERROR! - {0} ingresado incorrectamente, {1}: ", dato, requisitos);
+				}
+			}
+			return datoCasteado;
+		}
+		
 		
 		
 	}
