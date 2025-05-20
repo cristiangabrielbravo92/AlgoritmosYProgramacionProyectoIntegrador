@@ -54,20 +54,18 @@ namespace Proyecto_Integrador
 				// la idea del menú principal es manejarlo con un while y un switch
 				switch (opcion) {
 					case "1":
-						
-						// me falta manejar la devolución de null en la siguiente línea 
 						GrupoDeObreros grupoElegido = seleccionarGrupo(empresa);
+						if (grupoElegido == null) {
+							continue;
+						}
 						// acá tendrían que ir un while que pueda dar de alta masivamente obreros consultando si continuar dando de alta (en el mismo grupo)
-						// también tendría que verificarse que ya exista un grupo de obreros antes de instanciarlo o al menos instanciarlo
-						// pero tener la opcion de cancelar si no se tiene un grupo al que agregarlo con la devolución de null
-						
 						Obrero obrero = solicitarDatosYCrearObrero();
-						Console.WriteLine("--- impresión desde instancia obrero ---");
-						obrero.imprimir();
-						
-						
 						contratarUnObrero(obrero, empresa, grupoElegido);
 						
+						// ---- Pruebas ---- 
+						// borrar esto antes de entregar 
+						Console.WriteLine("--- impresión desde instancia obrero ---");
+						obrero.imprimir();
 						Console.WriteLine("--- impresión desde la lista de obreros de la empresa ---");
 						empresa.recuperarObreroPos(0).imprimir();
 						Console.WriteLine("--- impresión desde la lista de obreros en el grupo ---");
@@ -210,22 +208,24 @@ namespace Proyecto_Integrador
 		}
 		
 		static GrupoDeObreros seleccionarGrupo(Empresa empresa) {
+
+			if (empresa.cantidadGrupos() == 0) {	
+        		Console.WriteLine("Alerta! - No existen grupos de obreros todavía, intente dar de alta uno en la opción 7 del menú de inicio y luego vuelva a esta opción. ");
+        		return null;
+    			}
 			bool grupoCorrecto = false;
 			GrupoDeObreros grupoSeleccionado = new GrupoDeObreros(0);
 //			ArrayList grupos = new ArrayList();
 //			grupos = empresa.verListaObreros();
 			// acá quiero mostrar una lista de grupos para usar el for común pero de momento no está saliendo
-			Console.WriteLine("Seleccionar el grupo al que se asignará el nuevo obrero - Grupo (Obra asignada)");
+			Console.WriteLine("Seleccionar el grupo al que se asignará el nuevo obrero: \nActualmente existen {0} grupos de obreros \nGrupo - Obra asignada", empresa.cantidadGrupos());
 			for (int i = 0; i < empresa.cantidadGrupos(); i++) {
-				Console.WriteLine("{0} ({1})", i+1, empresa.recuperarGrupoPos(i).CodigoObraTrabajando);
+				Console.WriteLine("{0} -{1}", i+1, empresa.recuperarGrupoPos(i).CodigoObraTrabajando);
 			}
 			
-			if (empresa.cantidadGrupos() == 0) {	
-        		Console.WriteLine("ERROR! - No existen grupos de obreros todavía, intente dar de alta uno en la opción 7 del menú de inicio y luego vuelva a esta opción. ");
-        		return null;
-    		}
 			
-			Console.Write("Ingrese el número del grupo de obreros (actualmente existen {0} grupos de obreros): ", empresa.cantidadGrupos());
+			
+			Console.Write("Ingrese el número del grupo de obreros: ");
 			while (!grupoCorrecto) {
 				try {
 					int posicion = int.Parse(Console.ReadLine());
