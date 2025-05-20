@@ -14,20 +14,36 @@ namespace Proyecto_Integrador
 	{
 		public static void Main(string[] args)
 		{
-			// declaro las variables para poder empezar a usarlas, queda pendiente ver cuáles se usan como variables globales y cuáles locales
-			Empresa empresa;
+			// declaro la variable para poder empezar a usarla, queda pendiente ver cuáles se usan como variables globales y cuáles locales
+			//Empresa empresa = new Empresa();
+			// instancia de empresa que funcionaría en el main
+			Empresa empresa = new Empresa("Corporación ACME");
 			
-			// instancias de obra, grupo de obreros y jefe de obra que se usan para pruebas durante la implementación.
-			Obra obra;
-			GrupoDeObreros obreros;
+			// instancias de obra, grupo de obreros, obra y jefe de obra que se usan para pruebas durante la implementación.
+			Obra obra1 = new Obra();
+			obra1.CodigoInterno = 1;
+			Obra obra2 = new Obra();
+			obra2.CodigoInterno = 2;
+			Obra obra3 = new Obra();
+			obra3.CodigoInterno = 3;
+			empresa.agregarObra(obra1);
+			empresa.agregarObra(obra2);
+			empresa.agregarObra(obra3);
+			
+			GrupoDeObreros obreros = new GrupoDeObreros(1);
+			GrupoDeObreros obreros2 = new GrupoDeObreros(1);
+			GrupoDeObreros obreros3 = new GrupoDeObreros(2);
+			empresa.agregarGrupo(obreros);
+			empresa.agregarGrupo(obreros2);
+			empresa.agregarGrupo(obreros3);
+			
 			//Obrero obrero;
 			JefeDeObra jefeObra;
 			
 			
 			string opcion;
 			
-			// instancia de empresa que funcionaría en el main
-			empresa = new Empresa("Corporación ACME");
+			
 			
 			imprimirBienvenida(empresa);
 			
@@ -39,15 +55,24 @@ namespace Proyecto_Integrador
 				switch (opcion) {
 					case "1":
 						
-						Obrero obrero = solicitarDatosYCrearObrero();
-						obrero.imprimir();
-						
+						// me falta manejar la devolución de null en la siguiente línea 
+						GrupoDeObreros grupoElegido = seleccionarGrupo(empresa);
 						// acá tendrían que ir un while que pueda dar de alta masivamente obreros consultando si continuar dando de alta
 						// también tendría que verificarse que ya exista un grupo de obreros antes de instanciarlo o al menos instanciarlo
 						// pero tener la opcion de cancelar si no se tiene un grupo al que agregarlo.
 						
 						// el grupo de obreros se podría obtener ingresando el número de su posición
-						contratarUnObrero(obrero, empresa, obreros);
+						Obrero obrero = solicitarDatosYCrearObrero();
+						Console.WriteLine("--- impresión desde instancia obrero ---");
+						obrero.imprimir();
+						
+						
+						contratarUnObrero(obrero, empresa, grupoElegido);
+						
+						Console.WriteLine("--- impresión desde la lista de obreros de la empresa ---");
+						empresa.recuperarObreroPos(0).imprimir();
+						Console.WriteLine("--- impresión desde la lista de obreros en el grupo ---");
+						grupoElegido.recuperarObreroPos(0).imprimir();
 						
 						break;
 					case "2":
@@ -180,12 +205,47 @@ namespace Proyecto_Integrador
 		}
 			
 			
-		static void contratarUnObrero(Obrero obrero, Empresa empresa, GrupoDeObreros grupoDeObreros) {
+		static void contratarUnObrero(Obrero obrero, Empresa empresa, GrupoDeObreros obreros) {
 			empresa.agregarObrero(obrero);
-			grupoDeObreros.agregarObrero(obrero);
+			obreros.agregarObrero(obrero);
 		}
 		
-		
+		static GrupoDeObreros seleccionarGrupo(Empresa empresa) {
+			bool grupoCorrecto = false;
+			GrupoDeObreros grupoSeleccionado = new GrupoDeObreros(0);
+//			ArrayList grupos = new ArrayList();
+//			grupos = empresa.verListaObreros();
+			// acá quiero mostrar una lista de grupos para usar el for común pero de momento no está saliendo
+			Console.WriteLine("Seleccionar el grupo al que se asignará el nuevo obrero - Grupo (Obra asignada)");
+			for (int i = 0; i < empresa.cantidadGrupos(); i++) {
+				Console.WriteLine("{0} ({1})", i+1, empresa.recuperarGrupoPos(i).CodigoObraTrabajando);
+			}
+			
+			if (empresa.cantidadGrupos() == 0) {	
+        		Console.WriteLine("ERROR! - No existen grupos de obreros todavía, intente dar de alta uno en la opción 7 del menú de inicio y luego vuelva a esta opción. ");
+        		return null;
+    		}
+			
+			Console.Write("Ingrese el número del grupo de obreros (actualmente existen {0} grupos de obreros): ", empresa.cantidadGrupos());
+			while (!grupoCorrecto) {
+				try {
+					int posicion = int.Parse(Console.ReadLine());
+					grupoSeleccionado = empresa.recuperarGrupoPos(posicion-1);
+					grupoCorrecto = true;
+				} catch (FormatException ex) {
+					Console.Write("ERROR! - Ingrese un número: ");
+					
+				} catch (IndexOutOfRangeException) {
+					Console.Write("ERROR! - Ingrese un número entre 1 y {0}: ", empresa.cantidadGrupos());
+					
+				} //catch (Exception) {
+//					Console.Write("ERROR! - Ingrese un numero nuevamente: ");
+//				}
+			}
+			
+			return grupoSeleccionado;
+			
+		}
 		
 		
 		

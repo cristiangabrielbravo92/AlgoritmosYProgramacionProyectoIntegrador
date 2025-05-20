@@ -15,7 +15,7 @@ namespace Proyecto_Integrador
 		//Declaración de atributos
 		private string nombreEmpresa;
 		private ArrayList Obras = new ArrayList();
-		private ArrayList GruposDeObreros = new ArrayList(8);
+		private ArrayList GruposDeObreros = new ArrayList();
 		private ArrayList obreros = new ArrayList();
 		
 		//Constructor
