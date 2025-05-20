@@ -57,11 +57,10 @@ namespace Proyecto_Integrador
 						
 						// me falta manejar la devolución de null en la siguiente línea 
 						GrupoDeObreros grupoElegido = seleccionarGrupo(empresa);
-						// acá tendrían que ir un while que pueda dar de alta masivamente obreros consultando si continuar dando de alta
+						// acá tendrían que ir un while que pueda dar de alta masivamente obreros consultando si continuar dando de alta (en el mismo grupo)
 						// también tendría que verificarse que ya exista un grupo de obreros antes de instanciarlo o al menos instanciarlo
-						// pero tener la opcion de cancelar si no se tiene un grupo al que agregarlo.
+						// pero tener la opcion de cancelar si no se tiene un grupo al que agregarlo con la devolución de null
 						
-						// el grupo de obreros se podría obtener ingresando el número de su posición
 						Obrero obrero = solicitarDatosYCrearObrero();
 						Console.WriteLine("--- impresión desde instancia obrero ---");
 						obrero.imprimir();
