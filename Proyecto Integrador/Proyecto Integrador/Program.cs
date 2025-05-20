@@ -30,12 +30,12 @@ namespace Proyecto_Integrador
 			empresa.agregarObra(obra2);
 			empresa.agregarObra(obra3);
 			
-			GrupoDeObreros obreros = new GrupoDeObreros(1);
-			GrupoDeObreros obreros2 = new GrupoDeObreros(1);
-			GrupoDeObreros obreros3 = new GrupoDeObreros(2);
-			empresa.agregarGrupo(obreros);
-			empresa.agregarGrupo(obreros2);
-			empresa.agregarGrupo(obreros3);
+//			GrupoDeObreros obreros = new GrupoDeObreros(1);
+//			GrupoDeObreros obreros2 = new GrupoDeObreros(1);
+//			GrupoDeObreros obreros3 = new GrupoDeObreros(2);
+//			empresa.agregarGrupo(obreros);
+//			empresa.agregarGrupo(obreros2);
+//			empresa.agregarGrupo(obreros3);
 			
 			//Obrero obrero;
 			JefeDeObra jefeObra;
@@ -56,7 +56,7 @@ namespace Proyecto_Integrador
 					case "1":
 						GrupoDeObreros grupoElegido = seleccionarGrupo(empresa);
 						if (grupoElegido == null) {
-							continue;
+							break;
 						}
 						// acá tendrían que ir un while que pueda dar de alta masivamente obreros consultando si continuar dando de alta (en el mismo grupo)
 						Obrero obrero = solicitarDatosYCrearObrero();
