@@ -4,3 +4,9 @@ C:\Users\antic\OneDrive\UNAJ\Algoritmos y Programación\Código\ProyectoIntegrad
 C:\Users\antic\OneDrive\UNAJ\Algoritmos y Programación\Código\ProyectoIntegrador\AlgoritmosYProgramacionProyectoIntegrador\Proyecto Integrador\Proyecto Integrador\bin\Debug\Proyecto Integrador.pdb
 C:\Users\antic\OneDrive\UNAJ\Algoritmos y Programación\Código\ProyectoIntegrador\AlgoritmosYProgramacionProyectoIntegrador\Proyecto Integrador\Proyecto Integrador\obj\Debug\Proyecto Integrador.exe
 C:\Users\antic\OneDrive\UNAJ\Algoritmos y Programación\Código\ProyectoIntegrador\AlgoritmosYProgramacionProyectoIntegrador\Proyecto Integrador\Proyecto Integrador\obj\Debug\Proyecto Integrador.pdb
+D:\Proyecto Empresa Constructora\AlgoritmosYProgramacionProyectoIntegrador\Proyecto Integrador\Proyecto Integrador\obj\Debug\Proyecto Integrador.csprojResolveAssemblyReference.cache
+D:\Proyecto Empresa Constructora\AlgoritmosYProgramacionProyectoIntegrador\Proyecto Integrador\Proyecto Integrador\obj\Debug\Proyecto Integrador.exe
+D:\Proyecto Empresa Constructora\AlgoritmosYProgramacionProyectoIntegrador\Proyecto Integrador\Proyecto Integrador\obj\Debug\Proyecto Integrador.pdb
+D:\Proyecto Empresa Constructora\AlgoritmosYProgramacionProyectoIntegrador\Proyecto Integrador\Proyecto Integrador\bin\Debug\Proyecto Integrador.exe.config
+D:\Proyecto Empresa Constructora\AlgoritmosYProgramacionProyectoIntegrador\Proyecto Integrador\Proyecto Integrador\bin\Debug\Proyecto Integrador.exe
+D:\Proyecto Empresa Constructora\AlgoritmosYProgramacionProyectoIntegrador\Proyecto Integrador\Proyecto Integrador\bin\Debug\Proyecto Integrador.pdb

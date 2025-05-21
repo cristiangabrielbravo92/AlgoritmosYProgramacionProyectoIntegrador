@@ -7,6 +7,7 @@
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
 using System;
+using System.Collections;
 
 namespace Proyecto_Integrador
 {
@@ -72,7 +73,7 @@ namespace Proyecto_Integrador
             Console.WriteLine("Cargo: {0} - Sueldo: {1}", cargo, sueldo);
             Console.WriteLine("Bonificación: {0}", bonificacionEspecial);
             Console.WriteLine("Obra a cargo: {0}", obra != null ? obra.NombreObra : "Ninguna");
-            Console.WriteLine("Grupo en obra: {0}", grupoDirigido != null ? grupoDirigido.CodigoObraTrabajando : "Ninguno");
+            Console.WriteLine("Grupo en obra: {0}", grupoDirigido.CodigoObraTrabajando);
         }
 		
 	}
