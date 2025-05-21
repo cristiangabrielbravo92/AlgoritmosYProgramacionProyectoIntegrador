@@ -53,6 +53,7 @@
     <Compile Include="JefeDeObra.cs" />
     <Compile Include="Obra.cs" />
     <Compile Include="Obrero.cs" />
+    <Compile Include="ObreroDuplicadoException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
