@@ -16,6 +16,8 @@ namespace Proyecto_Integrador
 	public class JefeDeObra:Obrero
 	{	// Atributos
 		private double bonificacionEspecial;
+		private Obra obra;
+		private int codigoInterno;
 		private GrupoDeObreros grupoDirigido;
 		
 		
@@ -23,8 +25,10 @@ namespace Proyecto_Integrador
 //		public JefeDeObra():base()
 //		{
 //		}
-		public JefeDeObra(string nombre, string apellido, int dni, int legajo, double sueldo, string cargo, double bonificacionEspecial, GrupoDeObreros grupoDirigido):base(nombre, apellido, dni, legajo, sueldo, cargo) 
+		public JefeDeObra(string nombre, string apellido, int dni, int legajo, double sueldo, string cargo, double bonificacionEspecial, Obra obra, GrupoDeObreros grupoDirigido):base(nombre, apellido, dni, legajo, sueldo, cargo) 
 		{ 	this.bonificacionEspecial = bonificacionEspecial;
+			this.obra = obra;
+			this.codigoInterno = codigoInterno;
 			this.grupoDirigido = grupoDirigido;
 		}
 		
@@ -33,19 +37,43 @@ namespace Proyecto_Integrador
 			get {return bonificacionEspecial;}
 			set {bonificacionEspecial = value;}
 		}
+		
 		public GrupoDeObreros GrupoDirigido {
 			get {return grupoDirigido;}
 			set {grupoDirigido = value;}
 		}
 		
+		public Obra Obra
+        {
+            get { return obra; }
+            set { obra = value; }
+        }
+		
+		public int CodigoInterno
+        {
+            get { return codigoInterno; }
+            set { codigoInterno = value; }
+        }
 		
 		// Métodos
-		public void imprimir() {
-			Console.WriteLine("Nombre: {0} {1} \nDNI: {2}	Legajo: {3}\nCargo: {4}", nombre, apellido, dni, legajo, cargo);
-			Console.WriteLine("Sueldo: {0} Bonificación: {1}", sueldo, bonificacionEspecial);
-			Console.WriteLine("Grupo a cargo: {0}", grupoDirigido.CodigoObraTrabajando);
-			               
-		}
+		
+		public void agregarJefe(JefeDeObra j) { }
+        public void eliminarJefe(int pos) { }
+        public int cantidadJefes() { return 0; }
+        public bool existeJefe(JefeDeObra j) { return false; }
+        public JefeDeObra recuperarJefePos(int pos) { return null; }
+        public ArrayList verJefes() { return null; }
+		
+		
+		public void Imprimir()
+        {
+            Console.WriteLine("Nombre: {0} {1}", nombre, apellido);
+            Console.WriteLine("DNI: {0} - Legajo: {1}", dni, legajo);
+            Console.WriteLine("Cargo: {0} - Sueldo: {1}", cargo, sueldo);
+            Console.WriteLine("Bonificación: {0}", bonificacionEspecial);
+            Console.WriteLine("Obra a cargo: {0}", obra != null ? obra.NombreObra : "Ninguna");
+            Console.WriteLine("Grupo en obra: {0}", grupoDirigido != null ? grupoDirigido.CodigoObraTrabajando : "Ninguno");
+        }
 		
 	}
 }
