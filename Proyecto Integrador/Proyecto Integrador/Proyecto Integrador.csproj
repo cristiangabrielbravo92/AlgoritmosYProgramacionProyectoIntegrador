@@ -51,6 +51,7 @@
     <Compile Include="Empresa.cs" />
     <Compile Include="GrupoDeObreros.cs" />
     <Compile Include="JefeDeObra.cs" />
+    <Compile Include="NoHayGrupoLibreException.cs" />
     <Compile Include="Obra.cs" />
     <Compile Include="Obrero.cs" />
     <Compile Include="ObreroDuplicadoException.cs" />
