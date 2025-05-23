@@ -56,15 +56,6 @@ namespace Proyecto_Integrador
             set { codigoInterno = value; }
         }
 		
-		// Métodos
-		
-		public void agregarJefe(JefeDeObra j) { }
-        public void eliminarJefe(int pos) { }
-        public int cantidadJefes() { return 0; }
-        public bool existeJefe(JefeDeObra j) { return false; }
-        public JefeDeObra recuperarJefePos(int pos) { return null; }
-        public ArrayList verJefes() { return null; }
-		
 		
 		public void Imprimir()
         {

@@ -10,3 +10,9 @@ D:\Proyecto Empresa Constructora\AlgoritmosYProgramacionProyectoIntegrador\Proye
 D:\Proyecto Empresa Constructora\AlgoritmosYProgramacionProyectoIntegrador\Proyecto Integrador\Proyecto Integrador\bin\Debug\Proyecto Integrador.exe.config
 D:\Proyecto Empresa Constructora\AlgoritmosYProgramacionProyectoIntegrador\Proyecto Integrador\Proyecto Integrador\bin\Debug\Proyecto Integrador.exe
 D:\Proyecto Empresa Constructora\AlgoritmosYProgramacionProyectoIntegrador\Proyecto Integrador\Proyecto Integrador\bin\Debug\Proyecto Integrador.pdb
+C:\AlgoritmosYProgramacionProyectoIntegrador\Proyecto Integrador\Proyecto Integrador\obj\Debug\Proyecto Integrador.csprojResolveAssemblyReference.cache
+C:\AlgoritmosYProgramacionProyectoIntegrador\Proyecto Integrador\Proyecto Integrador\obj\Debug\Proyecto Integrador.exe
+C:\AlgoritmosYProgramacionProyectoIntegrador\Proyecto Integrador\Proyecto Integrador\bin\Debug\Proyecto Integrador.exe.config
+C:\AlgoritmosYProgramacionProyectoIntegrador\Proyecto Integrador\Proyecto Integrador\bin\Debug\Proyecto Integrador.exe
+C:\AlgoritmosYProgramacionProyectoIntegrador\Proyecto Integrador\Proyecto Integrador\bin\Debug\Proyecto Integrador.pdb
+C:\AlgoritmosYProgramacionProyectoIntegrador\Proyecto Integrador\Proyecto Integrador\obj\Debug\Proyecto Integrador.pdb

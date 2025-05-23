@@ -48,6 +48,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="cantidadGruposMaxima.cs" />
     <Compile Include="Empresa.cs" />
     <Compile Include="GrupoDeObreros.cs" />
     <Compile Include="JefeDeObra.cs" />

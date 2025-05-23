@@ -15,7 +15,7 @@ namespace Proyecto_Integrador
 	{
 		// Atributos
 		private string nombreObra, propietario, tipoDeObra, estado;
-		private int codigoInterno;
+		private int codigoInterno;//, dniJefe;
 		private double costo;
 		
 		//Constructor
@@ -31,6 +31,7 @@ namespace Proyecto_Integrador
 			this.tipoDeObra = tipodeObra;
 			this.costo = costo;
 			this.estado = estado;
+			//this.dniJefe = 0;
 		}
 		
 		//Propiedades
@@ -68,6 +69,11 @@ namespace Proyecto_Integrador
 		{
 			get {return estado;}
 			set {estado = value;}
-		}	
+		}
+//		public int DniJefe
+//		{
+//			get {return dniJefe;}
+//			set {dniJefe = value;}
+//		}
 	}
 }

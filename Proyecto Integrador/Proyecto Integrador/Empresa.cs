@@ -17,8 +17,8 @@ namespace Proyecto_Integrador
         private ArrayList listaObras = new ArrayList();
         private ArrayList listaGrupos = new ArrayList();
         private ArrayList listaObreros = new ArrayList();
-
 		
+        
 		//Constructor
 		public Empresa()
 		{

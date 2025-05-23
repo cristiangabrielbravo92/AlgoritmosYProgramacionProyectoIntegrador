@@ -467,6 +467,7 @@ namespace Proyecto_Integrador
         
         static void AgregarNuevoGrupo(Empresa empresa)
         {
+        	if(empresa.cantidadGrupos() < 8){
         	try
         	{
         		int codigo = 0;
@@ -527,8 +528,10 @@ namespace Proyecto_Integrador
         	{
         		Console.WriteLine("\n[ERROR al agregar grupo]: {0}", ex.Message);
         	}
+        	}
+        	else{
+        		throw new cantidadGruposMaxima("Ya existen la cantidad de grupos máxima en la empresa");}
         }
-
         
         static void AsignarAGrupo(Empresa empresa, Obrero o)
         {
