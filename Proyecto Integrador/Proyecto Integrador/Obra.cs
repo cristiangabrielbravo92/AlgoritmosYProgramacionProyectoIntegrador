@@ -14,24 +14,26 @@ namespace Proyecto_Integrador
 	public class Obra
 	{
 		// Atributos
-		private string nombreObra, propietario, tipoDeObra, estado;
+		private string nombreObra, propietario, tipoObra, estado;
 		private int codigoInterno;
 		private double costo;
+		private int legajoJefe; // solo se almacena el legajo del jefe
 		
 		//Constructor
 		public Obra()
 		{
 		}
 		
-		public Obra(string nombreObra, string propietario, int codigoInterno, string tipodeObra, double costo, string estado)
-		{
-			this.nombreObra = nombreObra;
-			this.propietario = propietario;
-			this.codigoInterno = codigoInterno;
-			this.tipoDeObra = tipodeObra;
-			this.costo = costo;
-			this.estado = estado;
-		}
+		public Obra(string nombreObra, string propietario, int codigoInterno, string tipoObra, double costo, string estado)
+        {
+            this.nombreObra = nombreObra;
+            this.propietario = propietario;
+            this.codigoInterno = codigoInterno;
+            this.tipoObra = tipoObra;
+            this.costo = costo;
+            this.estado = estado;
+            this.legajoJefe = -1; // Sin jefe inicialmente
+        }
 		
 		//Propiedades
 		public string NombreObra
@@ -54,8 +56,8 @@ namespace Proyecto_Integrador
 		
 		public string TipoObra
 		{
-			get {return tipoDeObra;}
-			set {tipoDeObra = value;}
+			get {return tipoObra;}
+			set {tipoObra = value;}
 		}
 		
 		public double Costo
@@ -68,6 +70,11 @@ namespace Proyecto_Integrador
 		{
 			get {return estado;}
 			set {estado = value;}
-		}	
+		}
+		
+		public int LegajoJefe {
+			get {return legajoJefe;}
+			set { legajoJefe = value;}
+		}
 	}
 }
