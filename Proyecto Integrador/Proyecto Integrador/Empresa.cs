@@ -17,6 +17,9 @@ namespace Proyecto_Integrador
         private ArrayList listaObras = new ArrayList();
         private ArrayList listaGrupos = new ArrayList();
         private ArrayList listaObreros = new ArrayList();
+        private ArrayList listaJefes = new ArrayList();
+		
+
 		
         
 		//Constructor
@@ -24,9 +27,9 @@ namespace Proyecto_Integrador
 		{
 		}
 		
-		public Empresa(string nomb)
+		public Empresa(string nombre)
 		{
-			this.nombreEmpresa = nomb;
+			this.nombreEmpresa = nombre;
 		}
 		
 		//Propiedades 
@@ -36,7 +39,7 @@ namespace Proyecto_Integrador
 		
 		//Métodos Obras
 		public void agregarObra(Obra o) { listaObras.Add(o); }
-        public void eliminarObra(int pos) { listaObras.RemoveAt(pos); }
+        public void eliminarObra(Obra o) { listaObras.Remove(o); }
         public int cantidadObras() { return listaObras.Count; }
         public bool existeObra(Obra o) { return listaObras.Contains(o); }
         public Obra recuperarObraPos(int pos) { return (Obra)listaObras[pos]; }
@@ -44,7 +47,7 @@ namespace Proyecto_Integrador
 		
 		//Métodos Grupos de obreros
 		public void agregarGrupo(GrupoDeObreros g) { listaGrupos.Add(g); }
-        public void eliminarGrupo(int pos) { listaGrupos.RemoveAt(pos); }
+        public void eliminarGrupo(GrupoDeObreros g) { listaGrupos.Remove(g); }
         public int cantidadGrupos() { return listaGrupos.Count; }
         public bool existeGrupo(GrupoDeObreros g) { return listaGrupos.Contains(g); }
         public GrupoDeObreros recuperarGrupoPos(int pos) { return (GrupoDeObreros)listaGrupos[pos]; }
@@ -53,12 +56,17 @@ namespace Proyecto_Integrador
 		
 		//Métodos de obreros
 		public void agregarObrero(Obrero o) { listaObreros.Add(o); }
-        public void eliminarObrero(int pos) { listaObreros.RemoveAt(pos); }
+        public void eliminarObrero(Obrero o) { listaObreros.Remove(o); }
         public int cantidadObreros() { return listaObreros.Count; }
         public bool existeObrero(Obrero o) { return listaObreros.Contains(o); }
         public Obrero recuperarObreroPos(int pos) { return (Obrero)listaObreros[pos]; }
         public ArrayList verListaObreros() { return listaObreros; }
 		
-		
+		public void agregarJefe(JefeDeObra j) { listaJefes.Add(j); }
+        public void eliminarJefe(JefeDeObra j) { listaJefes.Remove(j); }
+        public int cantidadJefes() { return listaJefes.Count; }
+        public bool existeJefe(JefeDeObra j) { return listaJefes.Contains(j); }
+        public JefeDeObra recuperarJefePos(int pos) { return (JefeDeObra)listaJefes[pos]; }
+        public ArrayList verListaJefes() { return listaJefes; }
 	}
 }
