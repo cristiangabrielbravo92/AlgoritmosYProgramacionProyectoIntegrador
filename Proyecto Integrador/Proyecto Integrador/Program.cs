@@ -108,6 +108,43 @@ namespace Proyecto_Integrador
             Console.Clear();
             
         }
+        
+        
+        // -------------------------------------
+		// Funciones auxiliares
+		// -------------------------------------
+		static int ingresarYCastearDatoINT(string dato, string requisitos) {
+			Console.Write("Ingrese {0} ({1}): ", dato, requisitos);
+			int datoCasteado = 0;
+			bool datoCorrecto = false;
+			while (!datoCorrecto) {
+				try {
+					datoCasteado = int.Parse(Console.ReadLine());
+					datoCorrecto = true;
+				} catch (Exception) {
+					Console.Write("ERROR! - {0} ingresado incorrectamente, {1}: ", dato, requisitos);
+				}
+			}
+			return datoCasteado;
+		}
+
+		static float ingresarYCastearDatoFLOAT(string dato, string requisitos) {
+			Console.Write("Ingrese {0} ({1}): ", dato, requisitos);
+			float datoCasteado = 0;
+			bool datoCorrecto = false;
+			while (!datoCorrecto) {
+				try {
+					datoCasteado = float.Parse(Console.ReadLine());
+					datoCorrecto = true;
+				} catch (Exception) {
+					Console.Write("ERROR! - {0} ingresado incorrectamente, {1}: ", dato, requisitos);
+				}
+			}
+			return datoCasteado;
+		}
+        
+        
+        
 
         
         //FUNCIONES
@@ -416,11 +453,12 @@ namespace Proyecto_Integrador
         	{
         		Console.WriteLine("\n--- Crear Nueva Obra ---");
 
-        		Console.Write("\nNombre de la obra: ");
-        		string nombreObra = Console.ReadLine();
+        		Console.Write("\nNombre del propietario: ");
+        		string nombrePropietario = Console.ReadLine();
 
-        		Console.Write("Propietario: ");
-        		string propietario = Console.ReadLine();
+        		//Console.Write("DNI del propietario: ");
+        		//int propietario = int.Parse(Console.ReadLine());
+        		int dniPropietario = ingresarYCastearDatoINT("DNI del propietario", "solo ingresar el numero, sin puntos ni espacios");
 
         		int codigoInterno;
         		Console.Write("Código interno: ");
@@ -442,7 +480,7 @@ namespace Proyecto_Integrador
         		Console.Write("Estado (En ejecución, Finalizada, etc.): ");
         		string estado = Console.ReadLine();
 
-        		return new Obra(nombreObra, propietario, codigoInterno, tipoDeObra, costo, estado);
+        		return new Obra(nombrePropietario, dniPropietario, codigoInterno, tipoDeObra, costo, estado);
         	}
         	catch (Exception ex)
         	{

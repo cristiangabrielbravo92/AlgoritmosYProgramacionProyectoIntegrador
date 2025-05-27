@@ -14,37 +14,52 @@ namespace Proyecto_Integrador
 	public class Obra
 	{
 		// Atributos
-		private string nombreObra, propietario, tipoDeObra, estado;
-		private int codigoInterno;//, dniJefe;
+		private string nombrePropietario, tipoDeObra, estado;
+		private int codigoInterno, dniPropietario;//, dniJefe;
 		private double costo;
+		private JefeDeObra jefeDeObra;
+		
 		
 		//Constructor
 		public Obra()
 		{
 		}
-		
-		public Obra(string nombreObra, string propietario, int codigoInterno, string tipodeObra, double costo, string estado)
+		/*
+		public Obra(string nombrePropietario, int dniPropietario, int codigoInterno, string tipodeObra, double costo, string estado)
 		{
-			this.nombreObra = nombreObra;
-			this.propietario = propietario;
+			this.nombrePropietario = nombrePropietario;
+			this.dniPropietario = dniPropietario;
 			this.codigoInterno = codigoInterno;
 			this.tipoDeObra = tipodeObra;
 			this.costo = costo;
 			this.estado = estado;
 			//this.dniJefe = 0;
 		}
+		*/
 		
-		//Propiedades
-		public string NombreObra
+		public Obra(string nombrePropietario, int dniPropietario, int codigoInterno, string tipodeObra, JefeDeObra jefeDeObra,double costo, string estado)
 		{
-			get {return nombreObra;}
-			set {nombreObra = value;}
+			this.nombrePropietario = nombrePropietario;
+			this.dniPropietario = dniPropietario;
+			this.codigoInterno = codigoInterno;
+			this.tipoDeObra = tipodeObra;
+			this.costo = costo;
+			this.estado = estado;
+			this.jefeDeObra = jefeDeObra;
 		}
 		
-		public string Propietario
+		
+		//Propiedades
+		public string NombrePropietario
 		{
-			get {return propietario;}
-			set {propietario = value;}
+			get {return nombrePropietario;}
+			set {nombrePropietario = value;}
+		}
+		
+		public int DNIPropietario
+		{
+			get {return dniPropietario;}
+			set {dniPropietario = value;}
 		}
 		
 		public int CodigoInterno
@@ -70,10 +85,5 @@ namespace Proyecto_Integrador
 			get {return estado;}
 			set {estado = value;}
 		}
-//		public int DniJefe
-//		{
-//			get {return dniJefe;}
-//			set {dniJefe = value;}
-//		}
 	}
 }
