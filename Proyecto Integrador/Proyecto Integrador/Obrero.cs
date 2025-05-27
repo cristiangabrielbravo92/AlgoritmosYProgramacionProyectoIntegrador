@@ -15,7 +15,11 @@ namespace Proyecto_Integrador
 		protected string nombre, apellido, cargo;
 		protected int dni, legajo;
 		protected double sueldo;
+		
 		//Constructor
+		public Obrero()
+		{
+		}
 		public Obrero(string n, string a, int d, int l, double s, string c){
 			this.nombre = n;
 			this.apellido = a;

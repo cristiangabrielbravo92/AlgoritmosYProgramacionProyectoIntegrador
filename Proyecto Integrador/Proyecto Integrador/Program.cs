@@ -8,6 +8,8 @@
  */
 using System;
 using System.Collections;
+using System.Collections.Generic;
+
 
 namespace Proyecto_Integrador
 {
@@ -17,6 +19,51 @@ namespace Proyecto_Integrador
         {
         	// Inicialización de la empresa
             Empresa empresa = new Empresa("Constructora ACME");
+            
+            // Obras de prueba
+            Obra obra1 = new Obra("Casa en la playa", "Propietario1", 101, "Construcción", 50000, "En planificación");
+            Obra obra2 = new Obra("Centro comercial", "Propietario2", 102, "Remodelación", 120000, "En ejecución");
+
+            empresa.agregarObra(obra1);
+            empresa.agregarObra(obra2);
+            
+            // Grupos de prueba
+            GrupoDeObreros grupo1 = new GrupoDeObreros(0);
+            GrupoDeObreros grupo2 = new GrupoDeObreros(0);
+
+            // Agregarlos a la empresa
+            empresa.agregarGrupo(grupo1);
+            empresa.agregarGrupo(grupo2);
+            
+            // Lista de 18 obreros de prueba usando el constructor especificado
+            Obrero[] obrerosPrueba = new Obrero[]
+            {
+            	new Obrero("Juan", "Pérez", 1, 201, 1600, "Operario"),
+            	new Obrero("María", "López", 2, 202, 1620, "Operario"),
+            	new Obrero("Carlos", "Gómez", 3, 203, 1640, "Operario"),
+            	new Obrero("Lucía", "García", 4, 204, 1660, "Operario"),
+            	new Obrero("Pedro", "Sánchez", 5, 205, 1680, "Operario"),
+            	new Obrero("Ana", "Martínez", 6, 206, 1700, "Operario"),
+            	new Obrero("Luis", "Rodríguez", 7, 207, 1720, "Operario"),
+            	new Obrero("Sara", "Fernández", 8, 208, 1740, "Operario"),
+            	new Obrero("Miguel", "Pérez", 9, 209, 1760, "Operario"),
+            	new Obrero("Verónica", "Ramírez", 10, 210, 1780, "Operario"),
+            	new Obrero("Jorge", "Castro", 11, 211, 1800, "Operario"),
+            	new Obrero("Elena", "Morales", 12, 212, 1820, "Operario"),
+            	new Obrero("Andrés", "Villa", 13, 213, 1840, "Operario"),
+            	new Obrero("Paula", "Romero", 14, 214, 1860, "Operario"),
+            	new Obrero("Roberto", "Duarte", 15, 215, 1880, "Operario"),
+            	new Obrero("Sofía", "Castro", 16, 216, 1900, "Operario"),
+            	new Obrero("Fernando", "Morales", 17, 217, 1920, "Operario"),
+            	new Obrero("Clara", "Jiménez", 18, 218, 1940, "Operario"),
+            };
+
+            // Agregar obreros a la empresa
+            foreach (Obrero o in obrerosPrueba)
+            {
+            	empresa.agregarObrero(o);
+            }
+            
             bool continuar = true;
 
             // Bucle principal del programa
@@ -110,8 +157,6 @@ namespace Proyecto_Integrador
         }
 
         
-        //FUNCIONES
-        
         
         static void MostrarSubMenuImpresiones(Empresa empresa)
         {
@@ -155,32 +200,26 @@ namespace Proyecto_Integrador
 
         static void MostrarListadoObreros(Empresa empresa)
         {
-        	try
-        	{
-        		if (empresa.verListaObreros().Count > 0)
-        		{
-        			foreach (Obrero o in empresa.verListaObreros())
-        			{
-        				o.imprimir();
-        			}
-        		}
-        		else
-        		{
-        			Console.WriteLine("No hay obreros para mostrar.");
-        		}
-        	}
-        	catch (Exception ex)
-        	{
-        		Console.WriteLine("[ERROR al mostrar obreros]: " + ex.Message);
-        	}
+            try
+            {
+                foreach (Obrero o in empresa.verListaObreros())
+                {
+                    o.imprimir();
+                    Console.WriteLine("---------------------------");
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("[ERROR al mostrar obreros]: " + ex.Message);
+            }
         }
 
         static void MostrarObrasEnEjecucion(Empresa empresa)
         {
             try
             {
-            	if (empresa.verListaObreros().Count > 0){
-            		foreach (Obra o in empresa.verListaObras())
+            	foreach (Obra o in empresa.verListaObras())
             	{
             		if (o.Estado.ToLower() != "finalizada"){
             			Console.WriteLine(o.NombreObra);
@@ -189,10 +228,6 @@ namespace Proyecto_Integrador
             			Console.WriteLine("No hay obras en ejecución");
             		}
             	}
-            	}else{
-            		Console.WriteLine("No hay obras cargadas.");
-            	}
-            	
                 
             }
             catch (Exception ex)
@@ -203,57 +238,48 @@ namespace Proyecto_Integrador
 
         static void MostrarObrasFinalizadas(Empresa empresa)
         {
-        	try
-        	{
-        		if (empresa.verListaObreros().Count > 0){
-        			foreach (Obra o in empresa.verListaObras())
-        			{
-        				
-        				if (o.Estado.ToLower() == "finalizada"){
-        					Console.WriteLine(o.NombreObra);
-        				}
-        				else{
-        					Console.WriteLine("\nNo se encontraron obras finalizadas.");
-        				}
-        			}
-        		}else{
-        			Console.WriteLine("No hay obras cargadas.");
-        		}
-        		
-        	}
-        	catch (Exception ex)
-        	{
-        		Console.WriteLine("[ERROR al mostrar obras finalizadas]: " + ex.Message);
-        	}
+            try
+            {
+                foreach (Obra o in empresa.verListaObras())
+                {
+                	
+                	if (o.Estado.ToLower() == "finalizada"){
+                		Console.WriteLine(o.NombreObra);
+                	}
+                	else{
+                		Console.WriteLine("\nNo se encontraron obras finalizadas.");
+                	}
+                	
+                        
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("[ERROR al mostrar obras finalizadas]: " + ex.Message);
+            }
         }
 		
         static void MostrarJefesDeObra(Empresa empresa)
         {
-        	try
-        	{
-        		bool hayJefes = false;
-        		foreach (Obrero o in empresa.verListaObreros())
-        		{
-        			if (o is JefeDeObra)
-        			{
-        				JefeDeObra jefe = (JefeDeObra)o;
-        				jefe.imprimir();
-        				hayJefes = true;
-        				Console.WriteLine("---------------------------");
-        			}else{
-        				Console.WriteLine("No hay jefes de obra.");
-        			}
-        		}
+            try
+            {
+                if (empresa.cantidadJefes() == 0)
+                {
+                    Console.WriteLine("\nNo hay jefes de obra registrados.");
+                    return;
+                }
 
-        		if (!hayJefes)
-        		{
-        			Console.WriteLine("\nNo hay jefes de obra registrados.");
-        		}
-        	}
-        	catch (Exception ex)
-        	{
-        		Console.WriteLine("[ERROR al mostrar jefes de obra]: " + ex.Message);
-        	}
+                foreach (JefeDeObra jefe in empresa.verListaJefes())
+                {
+                    jefe.imprimir();
+                    Console.WriteLine("---------------------------");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("[ERROR al mostrar jefes de obra]: " + ex.Message);
+            }
         }
 
         
@@ -280,7 +306,6 @@ namespace Proyecto_Integrador
             }
         }
 
-        //Función que gestiona la contratación de un nuevo obrero
         static void GestionarObrero(Empresa empresa)
         {
         	bool continuarAgregando = true;
@@ -337,10 +362,9 @@ namespace Proyecto_Integrador
         }
 
 
-        //Función que crea y retorna un obrero
         static Obrero CrearObrero()
         {
-            Console.Write("\nNombre: "); string nombre = Console.ReadLine();
+            Console.Write("Nombre: "); string nombre = Console.ReadLine();
             Console.Write("Apellido: "); string apellido = Console.ReadLine();
             Console.Write("DNI: "); int dni = int.Parse(Console.ReadLine());
             Console.Write("Legajo: "); int legajo = int.Parse(Console.ReadLine());
@@ -349,15 +373,21 @@ namespace Proyecto_Integrador
             return new Obrero(nombre, apellido, dni, legajo, sueldo, cargo);
         }
 
-        //Función para eliminar un obrero de la empresa
         static void EliminarObrero(Empresa empresa)
         {
             try
             {
+            	Console.WriteLine("\n-------------- Lista de Obreros --------------");
+            	foreach (Obrero o in empresa.verListaObreros())
+                {
+                	Console.WriteLine("Legajo:{0}, Nombre y apellido {1} {2}", o.Legajo, o.Nombre,o.Apellido );
+                }
+            	
                 Console.Write("\nIngrese el legajo del obrero a eliminar: ");
                 int legajo = int.Parse(Console.ReadLine());
                 Obrero obreroAEliminar = null;
 
+                
                 
                 foreach (Obrero o in empresa.verListaObreros())
                 {
@@ -399,15 +429,35 @@ namespace Proyecto_Integrador
         {
         	try
         	{
+        		// Crear el jefe y vincularlo correctamente
         		JefeDeObra jefe = CrearJefeDeObra(empresa);
+
+        		// Agregar jefe tanto a lista de obreros como de jefes
         		empresa.agregarObrero(jefe);
-        		Console.WriteLine("\nJefe de obra creado y añadido.");
+        		empresa.agregarJefe(jefe);
+
+        		// Asignar el legajo del jefe a la obra correspondiente
+        		foreach (Obra o in empresa.verListaObras())
+        		{
+        			if (o.CodigoInterno == jefe.CodigoObra)
+        			{
+        				o.LegajoJefe = jefe.Legajo;
+        				break;
+        			}
+        		}
+
+        		Console.WriteLine("\nJefe de obra creado, asignado a grupo y vinculado a obra.");
         	}
         	catch (NoHayGrupoLibreException ex)
         	{
         		Console.WriteLine("[AVISO]: " + ex.Message);
         	}
+        	catch (Exception ex)
+        	{
+        		Console.WriteLine("[ERROR general]: " + ex.Message);
+        	}
         }
+
         
         
         static Obra CrearObra()
@@ -446,12 +496,12 @@ namespace Proyecto_Integrador
         	}
         	catch (Exception ex)
         	{
-        		Console.WriteLine("\nError al crear la obra: {0}",ex.Message);
+        		Console.WriteLine("\nError al crear la obra: {}",ex.Message);
         		return null;
         	}
         }
 
-        static void CrearYAgregarObra(Empresa empresa)
+        public static void CrearYAgregarObra(Empresa empresa)
         {
         	Obra obra = CrearObra();
         	if (obra != null)
@@ -470,22 +520,40 @@ namespace Proyecto_Integrador
         	try
         	{
         		int codigo = 0;
-        		Console.Write("\n¿Desea asignarle desde ahora una obra al grupo? (SI/NO): ");
+        		Console.WriteLine("\n--- Crear Nuevo Grupo De Obreros ---");
+        		Console.Write("¿Desea asignarle desde ahora una obra al grupo? (SI/NO): ");
         		string respuestaObra = Console.ReadLine().Trim().ToUpper();
-
+        		
         		if (respuestaObra == "SI")
         		{
+        			// Mostrar obras disponibles
+        			Console.WriteLine("\nObras disponibles:");
+        			for (int i = 0; i < empresa.cantidadObras(); i++)
+        			{
+        				Obra o = empresa.recuperarObraPos(i);
+        				Console.WriteLine("{0}) {1} (Código: {2})", i + 1, o.NombreObra, o.CodigoInterno);
+        			}
+        			
         			Console.Write("Ingrese el código de obra: ");
-        			codigo = int.Parse(Console.ReadLine());
+        			if (!int.TryParse(Console.ReadLine(), out codigo))
+        			{
+        				Console.WriteLine("Código inválido. Se creará grupo libre (sin obra asignada).");
+        				codigo = 0;
+        			}
         		}
 
         		GrupoDeObreros nuevoGrupo = new GrupoDeObreros(codigo);
         		empresa.agregarGrupo(nuevoGrupo);
-        		Console.WriteLine("\nGrupo de obreros agregado.");
-
         		
-        		ArrayList obrerosNoAsignados = new ArrayList();
+        		string estadoGrupo;
+        		if (codigo == 0)
+        			estadoGrupo = "LIBRE";
+        		else
+        			estadoGrupo = string.Format("ASIGNADO A OBRA {0}", codigo);
+        		Console.WriteLine("✓ Grupo de obreros agregado exitosamente ({0}).", estadoGrupo);
 
+        		// Buscar obreros no asignados a ningún grupo
+        		ArrayList obrerosNoAsignados = new ArrayList();
         		foreach (Obrero o in empresa.verListaObreros())
         		{
         			bool estaAsignado = false;
@@ -501,26 +569,33 @@ namespace Proyecto_Integrador
         				obrerosNoAsignados.Add(o);
         		}
 
+        		// Ofrecer asignar obreros disponibles
         		if (obrerosNoAsignados.Count > 0)
         		{
-        			Console.Write("\n¿Desea asignar obreros disponibles a este grupo? (SI/NO): ");
+        			Console.WriteLine("\nSe encontraron {0} obreros sin asignar a ningún grupo.", obrerosNoAsignados.Count);
+        			Console.Write("¿Desea asignar obreros disponibles a este grupo? (SI/NO): ");
         			string respuestaObreros = Console.ReadLine().Trim().ToUpper();
-
+        			
         			if (respuestaObreros == "SI")
         			{
+        				int asignados = 0;
         				foreach (Obrero o in obrerosNoAsignados)
         				{
-        					Console.Write("\n¿Asignar al obrero {0} {1} (Legajo {2})? (SI/NO): ", o.Nombre, o.Apellido, o.Legajo);
+        					Console.Write("¿Asignar al obrero {0} {1} (Legajo {2})? (SI/NO): ",
+        					              o.Nombre, o.Apellido, o.Legajo);
         					string asignar = Console.ReadLine().Trim().ToUpper();
         					if (asignar == "SI")
+        					{
         						nuevoGrupo.agregarObrero(o);
+        						asignados++;
+        					}
         				}
-        				Console.WriteLine("\nAsignación finalizada.");
+        				Console.WriteLine("✓ Asignación finalizada. {0} obreros asignados al grupo.", asignados);
         			}
         		}
         		else
         		{
-        			Console.WriteLine("\nNo hay obreros disponibles para asignar.");
+        			Console.WriteLine("\nNo hay obreros disponibles para asignar (todos están en otros grupos).");
         		}
         	}
         	catch (Exception ex)
@@ -573,38 +648,166 @@ namespace Proyecto_Integrador
         
         static JefeDeObra CrearJefeDeObra(Empresa empresa)
         {
-            GrupoDeObreros grupoLibre = null;
-            foreach (GrupoDeObreros g in empresa.verListaGrupos())
-            {
-                if (g.CodigoObraTrabajando == 0)
-                {
-                    grupoLibre = g;
-                    break;
-                }
-            }
+        	// Buscar grupos libres (no asignados a ninguna obra)
+        	GrupoDeObreros grupoLibre = null;
+        	List<GrupoDeObreros> gruposLibres = new List<GrupoDeObreros>();
+        	
+        	foreach (GrupoDeObreros g in empresa.verListaGrupos())
+        	{
+        		if (g.CodigoObraTrabajando == 0)
+        		{
+        			gruposLibres.Add(g);
+        		}
+        	}
 
-            if (grupoLibre == null)
-            	throw new NoHayGrupoLibreException("\nNo hay grupos libres disponibles para asignar.\nDebe dar de alta un grupo de obreros ");
+        	
+        	Console.WriteLine("\nDebe existir un grupo de obreros para contratar un jefe de obra.");
+        	
+        	if (empresa.cantidadGrupos() > 0)
+        	{
+        		Console.WriteLine("\nDetalle de todos los grupos:");
+        		for (int i = 0; i < empresa.cantidadGrupos(); i++)
+        		{
+        			GrupoDeObreros g = empresa.recuperarGrupoPos(i);
+        			string estado = g.CodigoObraTrabajando == 0 ? "LIBRE" : "OCUPADO (Obra: " + g.CodigoObraTrabajando + ")";
+        			Console.WriteLine("  Grupo {0}: {1}", i + 1, estado);
+        		}
+        	}
+        	
 
+        	// CASO 1: No hay grupos creados - Ofrecer crear uno
+        	if (empresa.cantidadGrupos() == 0)
+        	{
+        		Console.WriteLine("\nNo hay grupos de obreros creados en la empresa.");
+        		Console.Write("\n¿Desea crear un grupo automáticamente? (SI/NO): ");
+        		string respuesta = Console.ReadLine().Trim().ToUpper();
+        		
+        		if (respuesta == "SI")
+        		{
+        			// Crear grupo automáticamente
+        			GrupoDeObreros nuevoGrupo = new GrupoDeObreros(0); // Grupo libre
+        			empresa.agregarGrupo(nuevoGrupo);
+        			grupoLibre = nuevoGrupo;
+        			Console.WriteLine("\nGrupo creado automáticamente y disponible para asignar.");
+        		}
+        		else
+        		{
+        			throw new Exception("\nNo se puede crear un jefe sin grupos disponibles.\nUse la opción 8 del menú principal para crear grupos primero.");
+        		}
+        	}
+        	// CASO 2: Hay grupos pero todos están ocupados
+        	else if (gruposLibres.Count == 0)
+        	{
+        		Console.WriteLine("\nTodos los grupos existentes están ocupados trabajando en otras obras.");
+        		Console.Write("\n¿Desea crear un nuevo grupo libre? (SI/NO): ");
+        		string respuesta = Console.ReadLine().Trim().ToUpper();
+        		
+        		if (respuesta == "SI")
+        		{
+        			GrupoDeObreros nuevoGrupo = new GrupoDeObreros(0);
+        			empresa.agregarGrupo(nuevoGrupo);
+        			grupoLibre = nuevoGrupo;
+        			Console.WriteLine("\nNuevo grupo creado y disponible para asignar.");
+        		}
+        		else
+        		{
+        			throw new Exception("\nNo hay grupos libres disponibles y el usuario optó por no crear uno nuevo.");
+        		}
+        	}
+        	// CASO 3: Hay grupos libres disponibles
+        	else
+        	{
+        		grupoLibre = gruposLibres[0];
+        		Console.WriteLine("\nUsando grupo libre disponible.");
+        	}
 
-            Console.WriteLine("\nSeleccione obra:");
-            for (int i = 0; i < empresa.cantidadObras(); i++)
-            {
-                Obra o = empresa.recuperarObraPos(i);
-                Console.WriteLine("\n{0} - {1}", i, o.NombreObra);
-            }
-            int idxObra = int.Parse(Console.ReadLine());
-            Obra obraSeleccionada = empresa.recuperarObraPos(idxObra);
+        	// Mostrar obras disponibles que NO tienen jefe asignado
+        	Console.WriteLine("\n---------------- Obras Disponibles Sin Jefe ----------------");
+        	List<Obra> obrasSinJefe = new List<Obra>();
+        	
+        	for (int i = 0; i < empresa.cantidadObras(); i++)
+        	{
+        		Obra o = empresa.recuperarObraPos(i);
+        		if (o.LegajoJefe == -1)
+        		{
+        			obrasSinJefe.Add(o);
+        			Console.WriteLine("\n{0}) {1} (Código: {2}) - Estado: {3}",
+        			                  obrasSinJefe.Count, o.NombreObra, o.CodigoInterno, o.Estado);
+        		}
+        	}
 
-            Obrero baseObrero = CrearObrero();
-            Console.Write("Bonificación especial: ");
-            double bonif = double.Parse(Console.ReadLine());
+        	// Validar que hay obras disponibles
+        	if (obrasSinJefe.Count == 0)
+        	{
+        		throw new Exception("\nNo hay obras disponibles sin jefe asignado.\nTodas las obras ya tienen un jefe asignado.");
+        	}
 
-            grupoLibre.CodigoObraTrabajando = obraSeleccionada.CodigoInterno;
+        	Console.WriteLine("--------------------------------------------------------\n");
 
-            return new JefeDeObra(baseObrero.Nombre, baseObrero.Apellido, baseObrero.Dni, baseObrero.Legajo, baseObrero.Sueldo,
-                baseObrero.Cargo, bonif, obraSeleccionada, grupoLibre);
+        	// Seleccionar obra
+        	Console.Write("\nIngrese el número de la obra seleccionada (1-{0}): ", obrasSinJefe.Count);
+        	string entrada = Console.ReadLine();
+        	int seleccion;
+        	
+        	if (!int.TryParse(entrada, out seleccion))
+        	{
+        		throw new Exception("Entrada inválida. Debe ingresar un número.");
+        	}
+        	
+        	seleccion -= 1; // Ajustar para índice base 0
+        	
+        	if (seleccion < 0 || seleccion >= obrasSinJefe.Count)
+        	{
+        		throw new Exception(string.Format("Selección inválida. Debe estar entre 1 y {0}.", obrasSinJefe.Count));
+
+        	}
+
+        	Obra obraSeleccionada = obrasSinJefe[seleccion];
+        	Console.WriteLine("\nObra seleccionada: {0}", obraSeleccionada.NombreObra);
+
+        	// Crear datos del obrero base
+        	Console.WriteLine("\n----- Datos Del Jefe De Obra -----");
+        	Obrero baseObrero = CrearObrero();
+
+        	// Validación para bonificación especial
+        	double bonif;
+        	string entradaBonif;
+        	do
+        	{
+        		Console.Write("Bonificación especial: $");
+        		entradaBonif = Console.ReadLine();
+        		if (double.TryParse(entradaBonif, out bonif) && bonif >= 0)
+        		{
+        			break;
+        		}
+        		else
+        		{
+        			Console.WriteLine("\nEntrada no válida. Ingrese un número válido mayor o igual a 0.");
+        		}
+        	} while (true);
+
+        	// Asignar código de obra al grupo seleccionado
+        	grupoLibre.CodigoObraTrabajando = obraSeleccionada.CodigoInterno;
+        	
+        	Console.WriteLine("\nConfiguración de jefe:");
+        	Console.WriteLine("  - Jefe: {0} {1} (Legajo: {2})", baseObrero.Nombre, baseObrero.Apellido, baseObrero.Legajo);
+        	Console.WriteLine("  - Obra asignada: {0} (Código: {1})", obraSeleccionada.NombreObra, obraSeleccionada.CodigoInterno);
+        	Console.WriteLine("  - Bonificación: ${0}", bonif);
+
+        	// Crear y retornar el jefe de obra
+        	return new JefeDeObra(
+        		baseObrero.Nombre,
+        		baseObrero.Apellido,
+        		baseObrero.Dni,
+        		baseObrero.Legajo,
+        		baseObrero.Sueldo,
+        		baseObrero.Cargo,
+        		bonif,
+        		grupoLibre.CodigoObraTrabajando,  // Código del grupo (mismo que código de obra)
+        		obraSeleccionada.CodigoInterno    // Código de la obra
+        	);
         }
+
 
         static void ModificarEstadoObra(Empresa empresa)
         {
@@ -632,29 +835,95 @@ namespace Proyecto_Integrador
 
         static void DarDeBajaJefe(Empresa empresa)
         {
-            try
-            {
-                Console.Write("\nIngrese el legajo del jefe a eliminar: ");
-                int legajo = int.Parse(Console.ReadLine());
-                Obrero obrero = null;
-                for (int i = 0; i < empresa.cantidadObreros(); i++)
-                {
-                    obrero = empresa.recuperarObreroPos(i);
-                    if (obrero is JefeDeObra && obrero.Legajo == legajo)
-                    {
-                        empresa.eliminarObrero(i);
-                        GrupoDeObreros grupo = ((JefeDeObra)obrero).GrupoDirigido;
-                        grupo.CodigoObraTrabajando = 0;
-                        Console.WriteLine("\nJefe de obra eliminado y grupo liberado.");
-                        return;
-                    }
-                }
-                Console.WriteLine("\nNo se encontró un jefe de obra con ese legajo.");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("\n[ERROR al dar de baja al jefe]: " + ex.Message);
-            }
+        	try
+        	{
+        		if (empresa.cantidadJefes() == 0)
+        		{
+        			Console.WriteLine("\nNo hay jefes de obra registrados en la empresa.");
+        			return;
+        		}
+
+        		// Mostrar jefes disponibles
+        		Console.WriteLine("\n----- Jefes De Obra Registrados -----");
+        		foreach (JefeDeObra j in empresa.verListaJefes())
+        		{
+        			Console.WriteLine("Legajo: {0} - {1} {2} (Obra: {3})",
+        			                  j.Legajo, j.Nombre, j.Apellido, j.CodigoObra);
+        		}
+        		Console.WriteLine("------------------------------------\n");
+
+        		int legajo;
+        		Console.Write("Ingrese el legajo del jefe a eliminar: ");
+        		if (!int.TryParse(Console.ReadLine(), out legajo))
+        		{
+        			Console.WriteLine("Legajo inválido.");
+        			return;
+        		}
+
+        		JefeDeObra jefeABorrar = null;
+        		
+        		// Buscar el jefe en la lista de jefes
+        		foreach (JefeDeObra j in empresa.verListaJefes())
+        		{
+        			if (j.Legajo == legajo)
+        			{
+        				jefeABorrar = j;
+        				break;
+        			}
+        		}
+
+        		if (jefeABorrar == null)
+        		{
+        			Console.WriteLine("\nNo se encontró un jefe de obra con ese legajo.");
+        			return;
+        		}
+
+        		Console.WriteLine("\nJefe encontrado: {0} {1}", jefeABorrar.Nombre, jefeABorrar.Apellido);
+        		Console.Write("¿Confirma la eliminación? (SI/NO): ");
+        		string confirmacion = Console.ReadLine().Trim().ToUpper();
+        		
+        		if (confirmacion != "SI")
+        		{
+        			Console.WriteLine("Eliminación cancelada.");
+        			return;
+        		}
+
+        		// Eliminar jefe de ambas listas
+        		empresa.eliminarJefe(jefeABorrar);
+        		empresa.eliminarObrero(jefeABorrar);
+
+        		// Liberar el grupo de obreros asignado
+        		foreach (GrupoDeObreros g in empresa.verListaGrupos())
+        		{
+        			if (g.CodigoObraTrabajando == jefeABorrar.CodigoObra)
+        			{
+        				g.CodigoObraTrabajando = 0; // Liberar grupo
+        				Console.WriteLine("Grupo liberado (ahora disponible para otros jefes).");
+        				break;
+        			}
+        		}
+
+        		// Eliminar la referencia al jefe en la obra
+        		foreach (Obra o in empresa.verListaObras())
+        		{
+        			if (o.LegajoJefe == jefeABorrar.Legajo)
+        			{
+        				o.LegajoJefe = -1; // Sin jefe
+        				Console.WriteLine("Obra '{0}' quedó sin jefe asignado.", o.NombreObra);
+        				break;
+        			}
+        		}
+
+        		Console.WriteLine("\nJefe de obra eliminado exitosamente.");
+        		Console.WriteLine("  - Jefe removido de todas las listas");
+        		Console.WriteLine("  - Grupo liberado y disponible");
+        		Console.WriteLine("  - Obra desvinculada del jefe");
+        	}
+        	catch (Exception ex)
+        	{
+        		Console.WriteLine("\n[ERROR al dar de baja al jefe]: " + ex.Message);
+        	}
         }
+
     }
 }
