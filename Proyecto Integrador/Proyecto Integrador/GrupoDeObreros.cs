@@ -15,13 +15,20 @@ namespace Proyecto_Integrador
 		//Declaración de atributos
 		private int codigoObraTrabajando;
 		private ArrayList obreros = new ArrayList();
+		
 		//Constructor
-		public GrupoDeObreros(int c){
-			this.codigoObraTrabajando = c;}
+		public GrupoDeObreros()
+		{
+        	this.codigoObraTrabajando = 0;
+		}
+		public GrupoDeObreros(int codigoObraTrabajando){
+			this.codigoObraTrabajando = codigoObraTrabajando;}
+		
 		//Propiedades
 		public int CodigoObraTrabajando{
 			set{codigoObraTrabajando = value;}
 			get{return codigoObraTrabajando;}}
+		
 		//Métodos
 		//Agregar obrero
 		public void agregarObrero(Obrero o){
