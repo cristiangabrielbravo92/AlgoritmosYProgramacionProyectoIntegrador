@@ -21,8 +21,8 @@ namespace Proyecto_Integrador
             Empresa empresa = new Empresa("Constructora ACME");
             
             // Obras de prueba
-            Obra obra1 = new Obra("Casa en la playa", 1234578, 101, "Construcción", 50000, "En planificación");
-            Obra obra2 = new Obra("Centro comercial", 234567, 102, "Remodelación", 120000, "En ejecución");
+            Obra obra1 = new Obra("Casa en la playa", 1234578, "Construcción", 50000, "En planificación");
+            Obra obra2 = new Obra("Centro comercial", 234567, "Remodelación", 120000, "En ejecución");
 
             empresa.agregarObra(obra1);
             empresa.agregarObra(obra2);
@@ -218,15 +218,17 @@ namespace Proyecto_Integrador
         static void MostrarObrasEnEjecucion(Empresa empresa)
         {
             try
-            {
+            {	bool existenObrasEnEjecucion = false;
             	foreach (Obra o in empresa.verListaObras())
-            	{
+            	{	
             		if (o.Estado.ToLower() != "finalizada"){
-            			Console.WriteLine(o.NombreObra);
+            			o.imprimir();
+            			existenObrasEnEjecucion = true;
             		}
-            		else {
-            			Console.WriteLine("No hay obras en ejecución");
-            		}
+            		
+            	}
+            	if (!existenObrasEnEjecucion) {
+            		Console.WriteLine("No hay obras en ejecución");
             	}
                 
             }
@@ -239,20 +241,18 @@ namespace Proyecto_Integrador
         static void MostrarObrasFinalizadas(Empresa empresa)
         {
             try
-            {
+            {	bool existenObrasFinalizadas = false;
                 foreach (Obra o in empresa.verListaObras())
                 {
                 	
                 	if (o.Estado.ToLower() == "finalizada"){
-                		Console.WriteLine(o.NombreObra);
-                	}
-                	else{
-                		Console.WriteLine("\nNo se encontraron obras finalizadas.");
-                	}
-                	
-                        
+                		o.imprimir();
+                		existenObrasFinalizadas = false;
+                	}       
                 }
-                
+                if (!existenObrasFinalizadas) {
+                	Console.WriteLine("\nNo se encontraron obras finalizadas.");
+                }
             }
             catch (Exception ex)
             {
@@ -475,13 +475,17 @@ namespace Proyecto_Integrador
         		{
         			Console.WriteLine("\nPor favor, ingrese un número válido para el DNI del propietario: ");
         		}
-
+        		
+        		
+        		// Cambiado por variable estática de la clase
+        		/*
         		int codigoInterno;
         		Console.Write("Código interno: ");
         		while (!int.TryParse(Console.ReadLine(), out codigoInterno))
         		{
         			Console.WriteLine("\nPor favor, ingrese un número válido para el código interno:");
         		}
+        		*/
 
         		Console.Write("\nTipo de obra: ");
         		string tipoDeObra = Console.ReadLine();
@@ -496,7 +500,7 @@ namespace Proyecto_Integrador
         		Console.Write("Estado (En ejecución, Finalizada, etc.): ");
         		string estado = Console.ReadLine();
 
-        		return new Obra(nombreObra, propietario, codigoInterno, tipoDeObra, costo, estado);
+        		return new Obra(nombreObra, propietario, tipoDeObra, costo, estado);
         	}
         	catch (Exception ex)
         	{

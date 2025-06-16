@@ -17,19 +17,22 @@ namespace Proyecto_Integrador
         private int codigoInterno, dniPropietario;
         private double costo;
         private int legajoJefe; // solo se almacena el legajo del jefe
+        public static int codInterno = 1;
 		
-        public Obra()
-		{
-		}
+//        public Obra()
+//		{
+//		}
         
-        public Obra(string nombreObra, int propietario, int codigoInterno, string tipoObra, double costo, string estado)
+        public Obra(string nombreObra, int propietario, string tipoObra, double costo, string estado)
         {
             this.nombreObra = nombreObra;
             this.dniPropietario = propietario;
-            this.codigoInterno = codigoInterno;
+            this.codigoInterno = codInterno;
+            codInterno++;
             this.tipoObra = tipoObra;
             this.costo = costo;
             this.estado = estado;
+            //this.LegajoJefe = legajoJefe;
             this.legajoJefe = -1; // Sin jefe inicialmente
         }
 
@@ -62,7 +65,13 @@ namespace Proyecto_Integrador
         	set { legajoJefe = value;} 
         }
         
-		
+        public void imprimir(){
+        	Console.WriteLine("--- Datos Obra ---");
+        	Console.WriteLine("Código: {0}", codigoInterno);
+        	Console.WriteLine("Nombre: {0} - DNI Propietario: {1}", nombreObra, dniPropietario);
+        	Console.WriteLine("Tipo: {0} - Costo: {1}", tipoObra, costo);
+        	Console.WriteLine("Estado: {0}", estado);
+        }
 		
 	}
 }
