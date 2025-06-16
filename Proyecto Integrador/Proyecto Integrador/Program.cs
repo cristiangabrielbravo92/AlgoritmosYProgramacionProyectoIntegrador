@@ -21,8 +21,8 @@ namespace Proyecto_Integrador
             Empresa empresa = new Empresa("Constructora ACME");
             
             // Obras de prueba
-            Obra obra1 = new Obra("Casa en la playa", "Propietario1", 101, "Construcción", 50000, "En planificación");
-            Obra obra2 = new Obra("Centro comercial", "Propietario2", 102, "Remodelación", 120000, "En ejecución");
+            Obra obra1 = new Obra("Casa en la playa", 1234578, 101, "Construcción", 50000, "En planificación");
+            Obra obra2 = new Obra("Centro comercial", 234567, 102, "Remodelación", 120000, "En ejecución");
 
             empresa.agregarObra(obra1);
             empresa.agregarObra(obra2);
@@ -470,7 +470,11 @@ namespace Proyecto_Integrador
         		string nombreObra = Console.ReadLine();
 
         		Console.Write("Propietario: ");
-        		string propietario = Console.ReadLine();
+        		int propietario = int.Parse(Console.ReadLine());
+        		while (!int.TryParse(Console.ReadLine(), out propietario))
+        		{
+        			Console.WriteLine("\nPor favor, ingrese un número válido para el DNI del propietario: ");
+        		}
 
         		int codigoInterno;
         		Console.Write("Código interno: ");
@@ -823,8 +827,25 @@ namespace Proyecto_Integrador
             }
             int idx = int.Parse(Console.ReadLine());
             Obra obra = empresa.recuperarObraPos(idx);
+            
             Console.Write("\nNuevo avance (%): ");
-            int avance = int.Parse(Console.ReadLine());
+            bool porcentajeValido = false; 
+            int avance = 0;
+            
+            while (!porcentajeValido) {
+            	try {
+            		avance = int.Parse(Console.ReadLine());
+            		if (avance > 100 || avance < 0) {
+            			throw new PorcentajeExcedidoException("Porcentaje Inválido: debe ser menor o igual a 100");
+            		}
+            		porcentajeValido = true;
+            	} catch (PorcentajeExcedidoException e) {
+            		Console.WriteLine(e.Mensaje);
+            		Console.Write("\nNuevo avance (%): ");
+            	}
+            }
+            
+            
             if (avance == 100)
             {
                 obra.Estado = "Finalizada";
