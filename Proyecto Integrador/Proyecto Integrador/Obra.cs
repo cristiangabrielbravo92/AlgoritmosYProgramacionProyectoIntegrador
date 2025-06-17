@@ -17,7 +17,7 @@ namespace Proyecto_Integrador
         private int codigoInterno, dniPropietario;
         private double costo;
         private int legajoJefe; // solo se almacena el legajo del jefe
-        public static int codInterno = 1;
+        private static int codInterno = 1;
 		
 //        public Obra()
 //		{

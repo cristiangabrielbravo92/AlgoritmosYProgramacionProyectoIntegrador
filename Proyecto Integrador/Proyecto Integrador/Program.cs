@@ -466,14 +466,14 @@ namespace Proyecto_Integrador
         	{
         		Console.WriteLine("\n--- Crear Nueva Obra ---");
 
-        		Console.Write("\nNombre de la obra: ");
+        		Console.Write("Nombre de la obra: ");
         		string nombreObra = Console.ReadLine();
 
-        		Console.Write("Propietario: ");
-        		int propietario = int.Parse(Console.ReadLine());
+        		Console.Write("DNI del Propietario: ");
+        		int propietario;// = int.Parse(Console.ReadLine());
         		while (!int.TryParse(Console.ReadLine(), out propietario))
         		{
-        			Console.WriteLine("\nPor favor, ingrese un número válido para el DNI del propietario: ");
+        			Console.WriteLine("Por favor, ingrese un número válido para el DNI del propietario: ");
         		}
         		
         		
@@ -487,8 +487,27 @@ namespace Proyecto_Integrador
         		}
         		*/
 
-        		Console.Write("\nTipo de obra: ");
+        		Console.Write("Tipo de obra: \n 1- Construcción\n 2- Remodelación\n 3- Ampliación\n 4- Otros tipos \nIngrese el tipo de obra: ");
+        		bool tipoObraValido = false;
         		string tipoDeObra = Console.ReadLine();
+        		while (!tipoObraValido) {
+        			switch (tipoDeObra) {
+        				case "1": 
+        					tipoDeObra = "Construcción"; tipoObraValido = true; break;
+        				case "2": 
+        					tipoDeObra = "Remodelación"; tipoObraValido = true; break;
+        				case "3": 
+        					tipoDeObra = "Ampliación"; tipoObraValido = true; break;
+        				case "4":
+        					tipoDeObra = "Otros tipos"; tipoObraValido = true; break;
+        				default: 
+        					Console.WriteLine("Opción Invalida, ingrese 1, 2, 3 o 4 según corresponda: ");
+        					tipoDeObra = Console.ReadLine();
+        					break;
+        			}
+        			
+        		}
+        		
 
         		double costo;
         		Console.Write("Costo: ");
@@ -497,8 +516,29 @@ namespace Proyecto_Integrador
         			Console.WriteLine("Por favor, ingrese un número válido para el costo:");
         		}
 
-        		Console.Write("Estado (En ejecución, Finalizada, etc.): ");
+        		
+        		Console.Write("Estado: \n 1- Planificada\n 2- En ejecución\n 3- Finalizada \nIngrese el estado de la obra: ");
+        		bool estadoValido = false;
         		string estado = Console.ReadLine();
+        		while (!estadoValido) {
+        			switch (estado) {
+        				case "1": 
+        					estado = "Planificada"; estadoValido = true; break;
+        				case "2": 
+        					estado = "En ejecución"; estadoValido = true; break;
+        				case "3": 
+        					estado = "Finalizada"; estadoValido = true; break;
+        				default: 
+        					Console.WriteLine("Opción Invalida, ingrese 1, 2 o 3 según corresponda: ");
+        					estado = Console.ReadLine();
+        					break;
+        			}
+        			
+        		}
+        		
+        		
+        		
+        		
 
         		return new Obra(nombreObra, propietario, tipoDeObra, costo, estado);
         	}
