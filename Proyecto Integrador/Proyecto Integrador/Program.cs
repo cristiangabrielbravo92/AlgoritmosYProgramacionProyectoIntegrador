@@ -805,9 +805,24 @@ namespace Proyecto_Integrador
         	// CASO 3: Hay grupos libres disponibles
         	else
         	{
-        		grupoLibre = (GrupoDeObreros) gruposLibres[0];
-        		Console.WriteLine("\nUsando grupo libre disponible.");
+        		//grupoLibre = (GrupoDeObreros) gruposLibres[0];
+        		Console.WriteLine("Seleccione un grupo de los siguientes:");
+        		for (int i = 1; i <= gruposLibres.Count; i++) {
+        			Console.WriteLine("Nro: {0} - Cod Obra: {1}", i, ((GrupoDeObreros) gruposLibres[i-1]).CodigoObraTrabajando);
+        		}
+        		//Console.Write("Ingrese el nro del grupo que desea seleccionar: ");
+        		int nroGrupo = ingresarYCastearDatoINT("nro del grupo", "solo ingrese el número"); 
+        	
+        		while (! (nroGrupo > 0 && nroGrupo <= gruposLibres.Count)) {
+        			Console.Write("Nro del grupo incorrecto! \nIngrese un número mayor a 0 y menor a {0}: ", gruposLibres.Count);
+        			nroGrupo = ingresarYCastearDatoINT("nro del grupo", "solo ingrese el número");  
+        		}
+        		grupoLibre = (GrupoDeObreros) gruposLibres[nroGrupo-1];
+        		Console.WriteLine("Grupo seleccionado: 'Nro: {0} - Cod Obra: {1}'", nroGrupo, grupoLibre.CodigoObraTrabajando);
+        		
         	}
+        		
+        	
 
         	// Mostrar obras disponibles que NO tienen jefe asignado
         	Console.WriteLine("\n================ Obras Disponibles Sin Jefe ================");
@@ -1051,6 +1066,36 @@ namespace Proyecto_Integrador
         		Console.WriteLine("\n[ERROR al dar de baja al jefe]: " + ex.Message);
         	}
         }
+        
+        static int ingresarYCastearDatoINT(string dato, string requisitos) {
+			Console.Write("Ingrese {0} ({1}): ", dato, requisitos);
+			int datoCasteado = 0;
+			bool datoCorrecto = false;
+			while (!datoCorrecto) {
+				try {
+					datoCasteado = int.Parse(Console.ReadLine());
+					datoCorrecto = true;
+				} catch (Exception) {
+					Console.Write("ERROR! - {0} ingresado incorrectamente, {1}: ", dato, requisitos);
+				}
+			}
+			return datoCasteado;
+		}
+        static float ingresarYCastearDatoFLOAT(string dato, string requisitos) {
+			Console.Write("Ingrese {0} ({1}): ", dato, requisitos);
+			float datoCasteado = 0;
+			bool datoCorrecto = false;
+			while (!datoCorrecto) {
+				try {
+					datoCasteado = float.Parse(Console.ReadLine());
+					datoCorrecto = true;
+				} catch (Exception) {
+					Console.Write("ERROR! - {0} ingresado incorrectamente, {1}: ", dato, requisitos);
+				}
+			}
+			return datoCasteado;
+		}
+
 
     }
 }
