@@ -734,7 +734,7 @@ namespace Proyecto_Integrador
         {
         	// Buscar grupos libres (no asignados a ninguna obra)
         	GrupoDeObreros grupoLibre = null;
-        	List<GrupoDeObreros> gruposLibres = new List<GrupoDeObreros>();
+        	ArrayList gruposLibres = new ArrayList();
         	
         	foreach (GrupoDeObreros g in empresa.verListaGrupos())
         	{
@@ -805,7 +805,7 @@ namespace Proyecto_Integrador
         	// CASO 3: Hay grupos libres disponibles
         	else
         	{
-        		grupoLibre = gruposLibres[0];
+        		grupoLibre = (GrupoDeObreros) gruposLibres[0];
         		Console.WriteLine("\nUsando grupo libre disponible.");
         	}
 
@@ -816,7 +816,7 @@ namespace Proyecto_Integrador
         	for (int i = 0; i < empresa.cantidadObras(); i++)
         	{
         		Obra o = empresa.recuperarObraPos(i);
-        		if (o.LegajoJefe == -1)
+        		if (o.LegajoJefe == -1 && o.Estado.ToLower()!= "finalizada")
         		{
         			obrasSinJefe.Add(o);
         			Console.WriteLine("\n{0}) {1} (Código: {2}) - Estado: {3}",
