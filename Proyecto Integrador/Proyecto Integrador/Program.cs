@@ -587,6 +587,12 @@ namespace Proyecto_Integrador
         	{
         		int codigo = 0;
         		Console.WriteLine("\n=== CREAR NUEVO GRUPO DE OBREROS ===");
+        		
+        		if (!existenciaJefe(empresa)) {
+        			Console.WriteLine("Alerta! Para agregar un grupo de obreros se debe dar de alta un jefe de obra. \nTras completar los datos del grupo, proceda a dar de alta un jefe.");
+        		}
+        		
+        		
         		Console.Write("¿Desea asignarle desde ahora una obra al grupo? (SI/NO): ");
         		string respuestaObra = Console.ReadLine().Trim().ToUpper();
         		
@@ -610,6 +616,10 @@ namespace Proyecto_Integrador
 
         		GrupoDeObreros nuevoGrupo = new GrupoDeObreros(codigo);
         		empresa.agregarGrupo(nuevoGrupo);
+        		Console.WriteLine("Grupo agregado correctamente!");
+        		nuevoGrupo.imprimir();
+        		Console.WriteLine();
+        		
         		
         		string estadoGrupo;
         		if (codigo == 0)
@@ -663,6 +673,12 @@ namespace Proyecto_Integrador
         		{
         			Console.WriteLine("\nNo hay obreros disponibles para asignar (todos están en otros grupos).");
         		}
+        		
+        		if (!existenciaJefe(empresa)) {
+        			Console.WriteLine("\nProcediendo a dar de alta un jefe de obra.\n");
+        			CrearYAgregarJefeDeObra(empresa);
+        		}
+        		
         	}
         	catch (Exception ex)
         	{
@@ -968,20 +984,54 @@ namespace Proyecto_Integrador
         		}
 
         		Console.WriteLine("\nJefe encontrado: {0} {1}", jefeABorrar.Nombre, jefeABorrar.Apellido);
-        		Console.Write("¿Confirma la eliminación? (SI/NO): ");
-        		string confirmacion = Console.ReadLine().Trim().ToUpper();
         		
-        		if (confirmacion != "SI")
-        		{
-        			Console.WriteLine("Eliminación cancelada.");
-        			return;
+				
+        		if (jefeABorrar.CodigoObra != null) {
+        			Console.WriteLine("Atención, el jefe que está siendo dado de baja está asignado a la obra {0}", jefeABorrar.CodigoObra);
+        			Console.WriteLine("Para continuar con la baja debe desvincularlo de la obra {0}. Para continuar ingrese SI o se cancelará la baja: ", jefeABorrar.CodigoObra);
+        			string continuar = Console.ReadLine();
+        			if (continuar.ToLower() == "si" || continuar.ToLower() == "sí") {
+        				// Eliminar la referencia al jefe en la obra
+        				foreach (Obra o in empresa.verListaObras())
+        				{
+        					if (o.LegajoJefe == jefeABorrar.Legajo)
+        					{
+        						o.LegajoJefe = -1; // Sin jefe
+        						Console.WriteLine("Obra '{0}' quedó sin jefe asignado.", o.NombreObra);
+        						break;
+        					}
+        					
+        				}
+        				
+        				
+        				Console.Write("¿Confirma la eliminación? (SI/NO): ");
+        				
+        				string confirmacion = Console.ReadLine().Trim().ToUpper();
+        				
+        				if (confirmacion != "SI")
+        				{
+        					Console.WriteLine("Eliminación cancelada.");
+        					return;
+        				}
+        				// Eliminar jefe de ambas listas
+        				empresa.eliminarJefe(jefeABorrar);
+        				empresa.eliminarObrero(jefeABorrar);
+        				Console.WriteLine("\nJefe de obra eliminado exitosamente.");
+        				Console.WriteLine("  - Obra desvinculada del jefe");
+        				Console.WriteLine("  - Jefe removido de todas las listas");
+        				//Console.WriteLine("  - Grupo liberado y disponible");
+        				
+        				
+        			} else {
+        				return;
+        			}
+        			
         		}
-
-        		// Eliminar jefe de ambas listas
-        		empresa.eliminarJefe(jefeABorrar);
-        		empresa.eliminarObrero(jefeABorrar);
+        		
+        		
 
         		// Liberar el grupo de obreros asignado
+        		/*
         		foreach (GrupoDeObreros g in empresa.verListaGrupos())
         		{
         			if (g.CodigoObraTrabajando == jefeABorrar.CodigoObra)
@@ -991,22 +1041,10 @@ namespace Proyecto_Integrador
         				break;
         			}
         		}
+        		*/
 
-        		// Eliminar la referencia al jefe en la obra
-        		foreach (Obra o in empresa.verListaObras())
-        		{
-        			if (o.LegajoJefe == jefeABorrar.Legajo)
-        			{
-        				o.LegajoJefe = -1; // Sin jefe
-        				Console.WriteLine("✓ Obra '{0}' quedó sin jefe asignado.", o.NombreObra);
-        				break;
-        			}
-        		}
-
-        		Console.WriteLine("\n✓ Jefe de obra eliminado exitosamente.");
-        		Console.WriteLine("  - Jefe removido de todas las listas");
-        		Console.WriteLine("  - Grupo liberado y disponible");
-        		Console.WriteLine("  - Obra desvinculada del jefe");
+        		
+				
         	}
         	catch (Exception ex)
         	{

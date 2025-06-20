@@ -48,5 +48,11 @@ namespace Proyecto_Integrador
 		//Recuperar lista de obreros
 		public ArrayList verObreros(){
 			return obreros;}
+		
+		public void imprimir() {
+			Console.WriteLine("--- Datos Grupo ---");
+			Console.WriteLine("Código obra trabajando: {0}", codigoObraTrabajando);
+		}
+		
 	}
 }
