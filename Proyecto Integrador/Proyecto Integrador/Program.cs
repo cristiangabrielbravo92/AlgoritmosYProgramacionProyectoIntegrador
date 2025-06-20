@@ -426,36 +426,46 @@ namespace Proyecto_Integrador
         }
         
         static void CrearYAgregarJefeDeObra(Empresa empresa)
-        {
-        	try
-        	{
-        		// Crear el jefe y vincularlo correctamente
-        		JefeDeObra jefe = CrearJefeDeObra(empresa);
+        {	
+			try
+			{
+				// Crear el jefe y vincularlo correctamente
+				JefeDeObra jefe = CrearJefeDeObra(empresa);
 
-        		// Agregar jefe tanto a lista de obreros como de jefes
-        		empresa.agregarObrero(jefe);
-        		empresa.agregarJefe(jefe);
+				// Agregar jefe tanto a lista de obreros como de jefes
+				empresa.agregarObrero(jefe);
+				empresa.agregarJefe(jefe);
 
-        		// Asignar el legajo del jefe a la obra correspondiente
-        		foreach (Obra o in empresa.verListaObras())
-        		{
-        			if (o.CodigoInterno == jefe.CodigoObra)
-        			{
-        				o.LegajoJefe = jefe.Legajo;
-        				break;
-        			}
-        		}
+				// Asignar el legajo del jefe a la obra correspondiente
+				foreach (Obra o in empresa.verListaObras())
+				{
+					if (o.CodigoInterno == jefe.CodigoObra)
+					{
+						o.LegajoJefe = jefe.Legajo;
+						break;
+					}
+				}
 
-        		Console.WriteLine("\nJefe de obra creado, asignado a grupo y vinculado a obra.");
+				Console.WriteLine("\nJefe de obra creado, asignado a grupo y vinculado a obra.");
+				//return jefe;
         	}
-        	catch (NoHayGrupoLibreException ex)
-        	{
-        		Console.WriteLine("[AVISO]: " + ex.Message);
-        	}
-        	catch (Exception ex)
-        	{
-        		Console.WriteLine("[ERROR general]: " + ex.Message);
-        	}
+			catch (NoHayGrupoLibreException ex)
+			{
+				Console.WriteLine("[AVISO]: " + ex.Message);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("[ERROR general]: " + ex.Message);
+			}
+        }
+        
+        static void CrearYAgregarJefeSinObra(Empresa empresa) {
+        	JefeDeObra jefe = CrearJefeDeObra(empresa);
+
+				// Agregar jefe tanto a lista de obreros como de jefes
+				empresa.agregarObrero(jefe);
+				empresa.agregarJefe(jefe);
+        	
         }
 
         
@@ -476,16 +486,6 @@ namespace Proyecto_Integrador
         			Console.WriteLine("Por favor, ingrese un número válido para el DNI del propietario: ");
         		}
         		
-        		
-        		// Cambiado por variable estática de la clase
-        		/*
-        		int codigoInterno;
-        		Console.Write("Código interno: ");
-        		while (!int.TryParse(Console.ReadLine(), out codigoInterno))
-        		{
-        			Console.WriteLine("\nPor favor, ingrese un número válido para el código interno:");
-        		}
-        		*/
 
         		Console.Write("Tipo de obra: \n 1- Construcción\n 2- Remodelación\n 3- Ampliación\n 4- Otros tipos \nIngrese el tipo de obra: ");
         		bool tipoObraValido = false;
@@ -499,7 +499,8 @@ namespace Proyecto_Integrador
         				case "3": 
         					tipoDeObra = "Ampliación"; tipoObraValido = true; break;
         				case "4":
-        					tipoDeObra = "Otros tipos"; tipoObraValido = true; break;
+        					Console.Write("Detalle el tipo de obra: ");
+        					tipoDeObra = Console.ReadLine(); tipoObraValido = true; break;
         				default: 
         					Console.WriteLine("Opción Invalida, ingrese 1, 2, 3 o 4 según corresponda: ");
         					tipoDeObra = Console.ReadLine();
@@ -548,9 +549,19 @@ namespace Proyecto_Integrador
         		return null;
         	}
         }
+        
+        
+        public static bool existenciaJefe(Empresa empresa) {
+        	return empresa.cantidadJefes() > 0;
+        }
+     
 
         public static void CrearYAgregarObra(Empresa empresa)
-        {
+        {	
+        	if (!existenciaJefe(empresa)) {
+        		Console.WriteLine("Alerta! Para agregar una obra se debe dar de alta un jefe de obra. \nTras completar los datos de la obra, proceda a dar de alta un jefe.");
+        	}
+        	
         	Obra obra = CrearObra();
         	if (obra != null)
         	{
@@ -561,6 +572,13 @@ namespace Proyecto_Integrador
         	{
         		Console.WriteLine("\nNo se pudo agregar la obra.\n");
         	}
+        	
+        	if (!existenciaJefe(empresa)) {
+        		Console.WriteLine("\nProcediendo a dar de alta un jefe de obra.\n");
+        		CrearYAgregarJefeDeObra(empresa);
+        	}
+        	
+        	
         }
         
         static void AgregarNuevoGrupo(Empresa empresa)
@@ -693,6 +711,8 @@ namespace Proyecto_Integrador
         		throw new Exception("\nEntrada inválida. Debe ingresar un número.");
         	}
         }
+        
+        
         
         static JefeDeObra CrearJefeDeObra(Empresa empresa)
         {

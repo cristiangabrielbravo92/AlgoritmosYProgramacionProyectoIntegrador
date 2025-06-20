@@ -35,6 +35,21 @@ namespace Proyecto_Integrador
             //this.LegajoJefe = legajoJefe;
             this.legajoJefe = -1; // Sin jefe inicialmente
         }
+        
+        public Obra(string nombreObra, int propietario, string tipoObra, double costo, string estado, int legajoJefe)
+        {
+            this.nombreObra = nombreObra;
+            this.dniPropietario = propietario;
+            this.codigoInterno = codInterno;
+            codInterno++;
+            this.tipoObra = tipoObra;
+            this.costo = costo;
+            this.estado = estado;
+            this.legajoJefe = legajoJefe;
+            
+        }
+        
+        
 
         public string NombreObra {
         	get {return nombreObra;}   
