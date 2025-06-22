@@ -356,7 +356,7 @@ namespace Proyecto_Integrador
         			// Opción de reintentar después de un error general
         			Console.Write("\n¿Desea intentar nuevamente? (SI/NO): ");
         			string reintentarRespuesta = Console.ReadLine().Trim().ToUpper();
-        			continuarAgregando = (reintentarRespuesta == "SI");
+        			continuarAgregando = (reintentarRespuesta == "SI" || reintentarRespuesta == "SÍ" );
         		}
         	} while (continuarAgregando);
         }
@@ -366,9 +366,12 @@ namespace Proyecto_Integrador
         {
             Console.Write("Nombre: "); string nombre = Console.ReadLine();
             Console.Write("Apellido: "); string apellido = Console.ReadLine();
-            Console.Write("DNI: "); int dni = int.Parse(Console.ReadLine());
-            Console.Write("Legajo: "); int legajo = int.Parse(Console.ReadLine());
-            Console.Write("Sueldo: "); double sueldo = double.Parse(Console.ReadLine());
+            //Console.Write("DNI: "); 
+            int dni = ingresarYCastearDatoINT("DNI", "(ingrese solo el número sin puntos)");
+            //Console.Write("Legajo: "); 
+            int legajo = ingresarYCastearDatoINT("Legajo", "(ingrese solo el número sin puntos ni guiones)");
+            //Console.Write("Sueldo: "); 
+            double sueldo = ingresarYCastearDatoDOUBLE("Sueldo", "(ingrese solo el número)");
             Console.Write("Cargo: "); string cargo = Console.ReadLine();
             return new Obrero(nombre, apellido, dni, legajo, sueldo, cargo);
         }
@@ -383,8 +386,9 @@ namespace Proyecto_Integrador
                 	Console.WriteLine("Legajo:{0}, Nombre y apellido {1} {2}", o.Legajo, o.Nombre,o.Apellido );
                 }
             	
-                Console.Write("\nIngrese el legajo del obrero a eliminar: ");
-                int legajo = int.Parse(Console.ReadLine());
+                //Console.Write("\nIngrese el legajo del obrero a eliminar: ");
+                //int legajo = int.Parse(Console.ReadLine());
+                int legajo = ingresarYCastearDatoINT("\nIngrese el legajo del obrero a eliminar", "(ingrese solo el número sin puntos ni guiones)");
                 Obrero obreroAEliminar = null;
 
                 
@@ -478,13 +482,17 @@ namespace Proyecto_Integrador
 
         		Console.Write("Nombre de la obra: ");
         		string nombreObra = Console.ReadLine();
-
+        		
+        		
+        		int propietario = ingresarYCastearDatoINT("DNI del propietario", "(ingrese solo el número sin puntos");
+        		/*
         		Console.Write("DNI del Propietario: ");
         		int propietario;// = int.Parse(Console.ReadLine());
         		while (!int.TryParse(Console.ReadLine(), out propietario))
         		{
         			Console.WriteLine("Por favor, ingrese un número válido para el DNI del propietario: ");
         		}
+        		*/
         		
 
         		Console.Write("Tipo de obra: \n 1- Construcción\n 2- Remodelación\n 3- Ampliación\n 4- Otros tipos \nIngrese el tipo de obra: ");
@@ -510,12 +518,15 @@ namespace Proyecto_Integrador
         		}
         		
 
+        		double costo = ingresarYCastearDatoDOUBLE("Costo", "ingrese solo el número");
+        		/*
         		double costo;
         		Console.Write("Costo: ");
         		while (!double.TryParse(Console.ReadLine(), out costo))
         		{
         			Console.WriteLine("Por favor, ingrese un número válido para el costo:");
         		}
+        		*/
 
         		
         		Console.Write("Estado: \n 1- Planificada\n 2- En ejecución\n 3- Finalizada \nIngrese el estado de la obra: ");
@@ -596,7 +607,7 @@ namespace Proyecto_Integrador
         		Console.Write("¿Desea asignarle desde ahora una obra al grupo? (SI/NO): ");
         		string respuestaObra = Console.ReadLine().Trim().ToUpper();
         		
-        		if (respuestaObra == "SI")
+        		if (respuestaObra == "SI" || respuestaObra == "SÍ")
         		{
         			// Mostrar obras disponibles
         			Console.WriteLine("\nObras disponibles:");
@@ -606,12 +617,19 @@ namespace Proyecto_Integrador
         				Console.WriteLine("{0}) {1} (Código: {2})", i + 1, o.NombreObra, o.CodigoInterno);
         			}
         			
+        			codigo = ingresarYCastearDatoINT("Ingrese el código de obra", "(solo ingrese el número)");
+        			while (! (codigo <= empresa.cantidadObras() && codigo > 0)) {
+        				Console.WriteLine("Código invalido, el código debe ser mayor a cero y menor a {0}", empresa.cantidadObras());
+        				codigo = ingresarYCastearDatoINT("Ingrese el código de obra", "(solo ingrese el número)");
+        			}
+        			/*
         			Console.Write("Ingrese el código de obra: ");
         			if (!int.TryParse(Console.ReadLine(), out codigo))
         			{
         				Console.WriteLine("Código inválido. Se creará grupo libre (sin obra asignada).");
         				codigo = 0;
         			}
+        			*/
         		}
 
         		GrupoDeObreros nuevoGrupo = new GrupoDeObreros(codigo);
@@ -626,7 +644,7 @@ namespace Proyecto_Integrador
         			estadoGrupo = "LIBRE";
         		else
         			estadoGrupo = string.Format("ASIGNADO A OBRA {0}", codigo);
-        		Console.WriteLine("✓ Grupo de obreros agregado exitosamente ({0}).", estadoGrupo);
+        		Console.WriteLine("Grupo de obreros agregado exitosamente ({0}).", estadoGrupo);
 
         		// Buscar obreros no asignados a ningún grupo
         		ArrayList obrerosNoAsignados = new ArrayList();
@@ -652,7 +670,7 @@ namespace Proyecto_Integrador
         			Console.Write("¿Desea asignar obreros disponibles a este grupo? (SI/NO): ");
         			string respuestaObreros = Console.ReadLine().Trim().ToUpper();
         			
-        			if (respuestaObreros == "SI")
+        			if (respuestaObreros == "SI" || respuestaObreros == "SÍ")
         			{
         				int asignados = 0;
         				foreach (Obrero o in obrerosNoAsignados)
@@ -660,13 +678,13 @@ namespace Proyecto_Integrador
         					Console.Write("¿Asignar al obrero {0} {1} (Legajo {2})? (SI/NO): ",
         					              o.Nombre, o.Apellido, o.Legajo);
         					string asignar = Console.ReadLine().Trim().ToUpper();
-        					if (asignar == "SI")
+        					if (asignar == "SI" || asignar == "SÍ")
         					{
         						nuevoGrupo.agregarObrero(o);
         						asignados++;
         					}
         				}
-        				Console.WriteLine("✓ Asignación finalizada. {0} obreros asignados al grupo.", asignados);
+        				Console.WriteLine("Asignación finalizada. {0} obreros asignados al grupo.", asignados);
         			}
         		}
         		else
@@ -703,9 +721,16 @@ namespace Proyecto_Integrador
         	}
 
         	
-        	Console.Write("Ingrese el número de grupo (1 a {0}): ", empresa.cantidadGrupos());
-
+        	int seleccion = ingresarYCastearDatoINT("Ingrese el número de grupo (1 a "+ empresa.cantidadGrupos() +")","(ingrese solo el número)");
+        	while (! (seleccion > 0 && seleccion <= empresa.cantidadGrupos())) {
+        		Console.WriteLine("Número de grupo incorrecto, ingrese un número mayor a cero y menor a {0}", empresa.cantidadGrupos());
+        		seleccion = ingresarYCastearDatoINT("Ingrese el número de grupo (1 a "+ empresa.cantidadGrupos() +")","(ingrese solo el número)");
+        	}
+        	GrupoDeObreros grupo = empresa.recuperarGrupoPos(seleccion);
+        	grupo.agregarObrero(o);
         	
+        	/*
+        	Console.Write("Ingrese el número de grupo (1 a {0}): ", empresa.cantidadGrupos());
         	string entrada = Console.ReadLine();
 
         	int seleccion;
@@ -726,6 +751,8 @@ namespace Proyecto_Integrador
         	{
         		throw new Exception("\nEntrada inválida. Debe ingresar un número.");
         	}
+        	*/
+        	
         }
         
         
@@ -757,7 +784,14 @@ namespace Proyecto_Integrador
         		for (int i = 0; i < empresa.cantidadGrupos(); i++)
         		{
         			GrupoDeObreros g = empresa.recuperarGrupoPos(i);
-        			string estado = g.CodigoObraTrabajando == 0 ? "LIBRE" : "OCUPADO (Obra: " + g.CodigoObraTrabajando + ")";
+        			//string estado = g.CodigoObraTrabajando == 0 ? "LIBRE" : "OCUPADO (Obra: " + g.CodigoObraTrabajando + ")";
+        			string estado;
+        			if (g.CodigoObraTrabajando == 0) {
+        				estado = "LIBRE";
+        			} else {
+        				estado = "OCUPADO (Obra: " + g.CodigoObraTrabajando + ")";
+        			}
+        			
         			Console.WriteLine("  Grupo {0}: {1}", i + 1, estado);
         		}
         	}
@@ -770,7 +804,7 @@ namespace Proyecto_Integrador
         		Console.Write("\n¿Desea crear un grupo automáticamente? (SI/NO): ");
         		string respuesta = Console.ReadLine().Trim().ToUpper();
         		
-        		if (respuesta == "SI")
+        		if (respuesta == "SI" || respuesta == "SÍ")
         		{
         			// Crear grupo automáticamente
         			GrupoDeObreros nuevoGrupo = new GrupoDeObreros(0); // Grupo libre
@@ -790,7 +824,7 @@ namespace Proyecto_Integrador
         		Console.Write("\n¿Desea crear un nuevo grupo libre? (SI/NO): ");
         		string respuesta = Console.ReadLine().Trim().ToUpper();
         		
-        		if (respuesta == "SI")
+        		if (respuesta == "SI" || respuesta == "SÍ")
         		{
         			GrupoDeObreros nuevoGrupo = new GrupoDeObreros(0);
         			empresa.agregarGrupo(nuevoGrupo);
@@ -811,11 +845,11 @@ namespace Proyecto_Integrador
         			Console.WriteLine("Nro: {0} - Cod Obra: {1}", i, ((GrupoDeObreros) gruposLibres[i-1]).CodigoObraTrabajando);
         		}
         		//Console.Write("Ingrese el nro del grupo que desea seleccionar: ");
-        		int nroGrupo = ingresarYCastearDatoINT("nro del grupo", "solo ingrese el número"); 
+        		int nroGrupo = ingresarYCastearDatoINT("Ingrese el número del grupo", "(solo ingrese el número)"); 
         	
         		while (! (nroGrupo > 0 && nroGrupo <= gruposLibres.Count)) {
         			Console.Write("Nro del grupo incorrecto! \nIngrese un número mayor a 0 y menor a {0}: ", gruposLibres.Count);
-        			nroGrupo = ingresarYCastearDatoINT("nro del grupo", "solo ingrese el número");  
+        			nroGrupo = ingresarYCastearDatoINT("Ingrese el número del grupo: ", "(solo ingrese el número)");  
         		}
         		grupoLibre = (GrupoDeObreros) gruposLibres[nroGrupo-1];
         		Console.WriteLine("Grupo seleccionado: 'Nro: {0} - Cod Obra: {1}'", nroGrupo, grupoLibre.CodigoObraTrabajando);
@@ -826,7 +860,7 @@ namespace Proyecto_Integrador
 
         	// Mostrar obras disponibles que NO tienen jefe asignado
         	Console.WriteLine("\n================ Obras Disponibles Sin Jefe ================");
-        	List<Obra> obrasSinJefe = new List<Obra>();
+        	ArrayList obrasSinJefe = new ArrayList();
         	
         	for (int i = 0; i < empresa.cantidadObras(); i++)
         	{
@@ -848,6 +882,7 @@ namespace Proyecto_Integrador
         	Console.WriteLine("========================================================\n");
 
         	// Seleccionar obra
+        	/*
         	Console.Write("\nIngrese el número de la obra seleccionada (1-{0}): ", obrasSinJefe.Count);
         	string entrada = Console.ReadLine();
         	int seleccion;
@@ -855,7 +890,10 @@ namespace Proyecto_Integrador
         	if (!int.TryParse(entrada, out seleccion))
         	{
         		throw new Exception("Entrada inválida. Debe ingresar un número.");
-        	}
+        	}*/
+        	int seleccion = ingresarYCastearDatoINT("\nIngrese el número de la obra seleccionada (1-"+obrasSinJefe.Count+")", "(ingrese solo el número)");
+        	
+        	
         	
         	seleccion -= 1; // Ajustar para índice base 0
         	
@@ -865,7 +903,7 @@ namespace Proyecto_Integrador
 
         	}
 
-        	Obra obraSeleccionada = obrasSinJefe[seleccion];
+        	Obra obraSeleccionada = (Obra) obrasSinJefe[seleccion];
         	Console.WriteLine("\nObra seleccionada: {0}", obraSeleccionada.NombreObra);
 
         	// Crear datos del obrero base
@@ -873,11 +911,17 @@ namespace Proyecto_Integrador
         	Obrero baseObrero = CrearObrero();
 
         	// Validación para bonificación especial
-        	double bonif;
+        	double bonif = ingresarYCastearDatoDOUBLE("Bonificación especial $","(ingrese un número)");
+        	while (bonif <= 0) {
+        		Console.WriteLine("\nEntrada no válida. Ingrese un número mayor o igual a 0.");
+        		bonif = ingresarYCastearDatoDOUBLE("Bonificación especial $","(ingrese un número)");
+        	}
+        	
+        	/*
         	string entradaBonif;
         	do
         	{
-        		Console.Write("Bonificación especial: $");
+        		Console.Write("Bonificación especial $");
         		entradaBonif = Console.ReadLine();
         		if (double.TryParse(entradaBonif, out bonif) && bonif >= 0)
         		{
@@ -888,6 +932,7 @@ namespace Proyecto_Integrador
         			Console.WriteLine("\nEntrada no válida. Ingrese un número válido mayor o igual a 0.");
         		}
         	} while (true);
+        	*/
 
         	// Asignar código de obra al grupo seleccionado
         	grupoLibre.CodigoObraTrabajando = obraSeleccionada.CodigoInterno;
@@ -920,23 +965,23 @@ namespace Proyecto_Integrador
                 Obra o = empresa.recuperarObraPos(i);
                 Console.WriteLine("{0} - {1} (Estado: {2})", i, o.NombreObra, o.Estado);
             }
-            int idx = int.Parse(Console.ReadLine());
+            int idx = ingresarYCastearDatoINT("Número de obra", "(ingrese solo el número de obra)");//int.Parse(Console.ReadLine());
             Obra obra = empresa.recuperarObraPos(idx);
             
-            Console.Write("\nNuevo avance (%): ");
+            //Console.Write("\nNuevo avance (%): ");
             bool porcentajeValido = false; 
             int avance = 0;
             
             while (!porcentajeValido) {
             	try {
-            		avance = int.Parse(Console.ReadLine());
+            		avance = ingresarYCastearDatoINT("Nuevo avance (%)", "(ingrese solo el número)");  //int.Parse(Console.ReadLine());
             		if (avance > 100 || avance < 0) {
             			throw new PorcentajeExcedidoException("Porcentaje Inválido: debe ser menor o igual a 100");
             		}
             		porcentajeValido = true;
             	} catch (PorcentajeExcedidoException e) {
             		Console.WriteLine(e.Mensaje);
-            		Console.Write("\nNuevo avance (%): ");
+            		//Console.Write("\nNuevo avance (%): ");
             	}
             }
             
@@ -972,13 +1017,14 @@ namespace Proyecto_Integrador
         		}
         		Console.WriteLine("=================================\n");
 
-        		int legajo;
+        		int legajo = ingresarYCastearDatoINT("Legajo del jefe a eliminar", "(ingrese solo el número)");
+        		/*
         		Console.Write("Ingrese el legajo del jefe a eliminar: ");
         		if (!int.TryParse(Console.ReadLine(), out legajo))
         		{
         			Console.WriteLine("Legajo inválido.");
         			return;
-        		}
+        		} */
 
         		JefeDeObra jefeABorrar = null;
         		
@@ -1003,7 +1049,7 @@ namespace Proyecto_Integrador
 				
         		if (jefeABorrar.CodigoObra != null) {
         			Console.WriteLine("Atención, el jefe que está siendo dado de baja está asignado a la obra {0}", jefeABorrar.CodigoObra);
-        			Console.WriteLine("Para continuar con la baja debe desvincularlo de la obra {0}. Para continuar ingrese SI o se cancelará la baja: ", jefeABorrar.CodigoObra);
+        			Console.Write("Para continuar con la baja debe desvincularlo de la obra {0}. Para continuar ingrese SI o se cancelará la baja: ", jefeABorrar.CodigoObra);
         			string continuar = Console.ReadLine();
         			if (continuar.ToLower() == "si" || continuar.ToLower() == "sí") {
         				// Eliminar la referencia al jefe en la obra
@@ -1023,7 +1069,7 @@ namespace Proyecto_Integrador
         				
         				string confirmacion = Console.ReadLine().Trim().ToUpper();
         				
-        				if (confirmacion != "SI")
+        				if (confirmacion != "SI" || confirmacion == "SÍ")
         				{
         					Console.WriteLine("Eliminación cancelada.");
         					return;
@@ -1038,6 +1084,7 @@ namespace Proyecto_Integrador
         				
         				
         			} else {
+        				Console.WriteLine("Eliminación cancelada.");
         				return;
         			}
         			
@@ -1068,7 +1115,7 @@ namespace Proyecto_Integrador
         }
         
         static int ingresarYCastearDatoINT(string dato, string requisitos) {
-			Console.Write("Ingrese {0} ({1}): ", dato, requisitos);
+			Console.Write("{0}: ", dato);
 			int datoCasteado = 0;
 			bool datoCorrecto = false;
 			while (!datoCorrecto) {
@@ -1076,13 +1123,14 @@ namespace Proyecto_Integrador
 					datoCasteado = int.Parse(Console.ReadLine());
 					datoCorrecto = true;
 				} catch (Exception) {
-					Console.Write("ERROR! - {0} ingresado incorrectamente, {1}: ", dato, requisitos);
+					Console.WriteLine("ERROR! - {0} ingresado incorrectamente {1}", dato, requisitos);
+					Console.Write("{0}: ",dato);
 				}
 			}
 			return datoCasteado;
 		}
         static float ingresarYCastearDatoFLOAT(string dato, string requisitos) {
-			Console.Write("Ingrese {0} ({1}): ", dato, requisitos);
+			Console.Write("{0}: ", dato);
 			float datoCasteado = 0;
 			bool datoCorrecto = false;
 			while (!datoCorrecto) {
@@ -1090,7 +1138,24 @@ namespace Proyecto_Integrador
 					datoCasteado = float.Parse(Console.ReadLine());
 					datoCorrecto = true;
 				} catch (Exception) {
-					Console.Write("ERROR! - {0} ingresado incorrectamente, {1}: ", dato, requisitos);
+					Console.WriteLine("ERROR! - {0} ingresado incorrectamente {1}", dato, requisitos);
+					Console.Write("{0}: ",dato);
+				}
+			}
+			return datoCasteado;
+		}
+        
+        static double ingresarYCastearDatoDOUBLE(string dato, string requisitos) {
+			Console.Write("{0}: ", dato);
+			double datoCasteado = 0;
+			bool datoCorrecto = false;
+			while (!datoCorrecto) {
+				try {
+					datoCasteado = double.Parse(Console.ReadLine());
+					datoCorrecto = true;
+				} catch (Exception) {
+					Console.WriteLine("ERROR! - {0} ingresado incorrectamente {1}", dato, requisitos);
+					Console.Write("{0}: ",dato);
 				}
 			}
 			return datoCasteado;
